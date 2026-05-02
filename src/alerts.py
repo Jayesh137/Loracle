@@ -19,7 +19,7 @@ def send_alert(subject: str, body: str, html_body: str | None = None) -> bool:
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
-    msg["From"] = f"Ezekiel Alerts <{alert_email}>"
+    msg["From"] = f"Loracle Alerts <{alert_email}>"
     msg["To"] = alert_email
 
     msg.attach(MIMEText(body, "plain"))
@@ -39,7 +39,7 @@ def send_alert(subject: str, body: str, html_body: str | None = None) -> bool:
 
 
 def alert_fund_movement(wallet: str, amount: str, destination: str, tx_hash: str) -> bool:
-    subject = "[EZEKIEL] CRITICAL: Fund Movement Detected"
+    subject = "[LORACLE] CRITICAL: Fund Movement Detected"
     body = (
         f"Wallet: {wallet}\n"
         f"Event: Withdrawal of {amount} USDC\n"
@@ -51,7 +51,7 @@ def alert_fund_movement(wallet: str, amount: str, destination: str, tx_hash: str
 
 
 def alert_new_wallet_found(source_wallet: str, new_wallet: str, method: str, confidence: float) -> bool:
-    subject = f"[EZEKIEL] {'CRITICAL' if method == 'fund_trace' else 'HIGH'}: New Linked Wallet Detected"
+    subject = f"[LORACLE] {'CRITICAL' if method == 'fund_trace' else 'HIGH'}: New Linked Wallet Detected"
     body = (
         f"New Wallet: {new_wallet}\n"
         f"Detection Method: {method}\n"
@@ -62,7 +62,7 @@ def alert_new_wallet_found(source_wallet: str, new_wallet: str, method: str, con
 
 
 def alert_behavioral_match(candidate: str, score: float, dimensions: dict) -> bool:
-    subject = f"[EZEKIEL] HIGH: Behavioral Match ({score:.0%} similarity)"
+    subject = f"[LORACLE] HIGH: Behavioral Match ({score:.0%} similarity)"
     dim_lines = "\n".join(
         f"  - {k}: {v:.2f}" for k, v in sorted(dimensions.items(), key=lambda x: -x[1])
     )

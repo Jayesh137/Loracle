@@ -11,7 +11,7 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? '' : '/Ezekiel'
+			base: process.argv.includes('dev') ? '' : '/Loracle'
 		}
 	}
 };

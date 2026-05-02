@@ -1,4 +1,4 @@
-# Ezekiel: Hyperliquid Trader Intelligence & Fingerprinting System
+# Loracle: Hyperliquid Trader Intelligence & Fingerprinting System
 
 ## Product Requirements Document (PRD)
 
@@ -6,23 +6,26 @@
 
 ## 1. Overview
 
-**Ezekiel** is an automated intelligence system that comprehensively logs every action performed by a specific Hyperliquid trader (codename: **"Ezekiel"**), builds a behavioral fingerprint from the data, and uses that fingerprint to identify the trader if they migrate to a new wallet.
+**Loracle** is an automated intelligence system that comprehensively logs every action performed by a specific Hyperliquid trader (codename: **"Loracle"**), builds a behavioral fingerprint from the data, and uses that fingerprint to identify the trader if they migrate to a new wallet.
 
-**Target Wallet:** `0x45d26f28196d226497130c4bac709d808fed4029`
+**Target Wallet:** `0x8def9f50456c6c4e37fa5d3d57f108ed23992dae`
 
-**Trader Codename:** Ezekiel
+**Trader Codename:** Loracle
 
-**Suspected Identity:** Possibly GCR (Twitter: @GiganticRebirth, @GCRClassic) — **unconfirmed hypothesis**. The system does NOT assume wallet ownership. The wallet and Twitter accounts are tracked as **separate entities** with correlation analysis to test the hypothesis.
+**Public Identity:** Laurent Zeimes — early Hyperliquid contributor, founder of [Hypurrfun](https://hypurr.fun) (memecoin launchpad on HyperLiquid) and (hyper/active) capital. Identity is publicly self-disclosed under the handle `@loraclexyz`. Unlike a fully anonymous target, the wallet ↔ Twitter linkage here is publicly known, so the system treats them as **a confirmed pair** rather than a hypothesis to test.
 
 **Twitter Accounts of Interest:**
-- `@GiganticRebirth` (primary)
-- `@GCRClassic` (secondary)
+- `@loraclexyz` (primary — self-identified)
+
+If additional handles or alt wallets are later attributed to Laurent Zeimes (e.g. the second-wallet $HYPE long flagged by 247 Research), they should be added to `config.json` and treated as additional known-related identifiers.
 
 ---
 
 ## 2. Problem Statement
 
-The user copy-trades a specific Hyperliquid wallet manually. If this trader closes the wallet and opens a new one, the user loses the ability to follow their trades. Hyperliquid's API only returns the most recent ~2000 entries per endpoint, and historical data disappears over time. Without continuous recording, this data is permanently lost.
+The user copy-trades / follows a specific Hyperliquid wallet manually. If this trader closes the wallet and opens a new one — or routes activity through an undisclosed alt — the user loses the ability to follow their trades. Hyperliquid's API only returns the most recent ~2000 entries per endpoint, and historical data disappears over time. Without continuous recording, this data is permanently lost.
+
+Loracle is publicly identified, but he has been observed using a second wallet on Hyperliquid. The risk of "loss of signal" is therefore real even though identity is known: he can spin up new wallets at any time, and only behavioral / on-chain patterns make them re-discoverable.
 
 ---
 
@@ -35,7 +38,7 @@ The user copy-trades a specific Hyperliquid wallet manually. If this trader clos
 | **P0** | Trace fund flows when withdrawals occur to directly find linked wallets |
 | **P1** | Scan Hyperliquid for new wallets matching the behavioral fingerprint |
 | **P1** | Send email alerts on fund movements and high-confidence wallet matches |
-| **P2** | Ingest existing research documents (GCR.docx, Trade Reviews.pdf) into the trader profile |
+| **P2** | Ingest existing research / public commentary into the trader profile |
 
 ---
 
@@ -63,14 +66,15 @@ The user copy-trades a specific Hyperliquid wallet manually. If this trader clos
 ### 5.2 Project Structure
 
 ```
-Ezekiel/
+Loracle/
 ├── .github/
 │   └── workflows/
 │       ├── collect.yml              # Cron: every 5 min — poll all HL endpoints
 │       ├── backfill.yml             # Manual trigger — initial historical data pull
 │       ├── scan.yml                 # Cron: every 1 hour — scan for matching wallets
 │       ├── analyze.yml              # Cron: daily — rebuild fingerprint + report
-│       └── trace.yml                # Cron: every 15 min — check for fund movements
+│       ├── trace.yml                # Cron: every 15 min — check for fund movements
+│       └── deploy-dashboard.yml     # On dashboard push — build + deploy GH Pages
 ├── src/
 │   ├── collector.py                 # Data collection from Hyperliquid API
 │   ├── backfill.py                  # Historical data backfill (fills, funding, ledger)
@@ -104,15 +108,14 @@ Ezekiel/
 │       ├── last_fill_time.txt       # Timestamp of last collected fill
 │       ├── last_funding_time.txt    # Timestamp of last collected funding
 │       └── last_ledger_time.txt     # Timestamp of last collected ledger entry
-├── research/                        # User's existing research docs
-│   ├── GCR.docx
-│   └── Trade Reviews.pdf
+├── research/                        # User's existing research docs / public commentary on Loracle
 ├── profile/
 │   ├── fingerprint.json             # Computed behavioral fingerprint
 │   ├── trader_profile.json          # Aggregated trader profile (from research + data)
 │   └── similarity_weights.json      # Configurable weights for fingerprint matching
 ├── reports/
 │   └── daily/                       # Daily summary reports: YYYY-MM-DD.md
+├── dashboard/                       # SvelteKit static dashboard (GitHub Pages)
 ├── config.json                      # Configuration (wallet address, thresholds, email)
 ├── requirements.txt                 # Python dependencies
 └── PRD.md                           # This document
@@ -167,30 +170,30 @@ Ezekiel/
 
 | # | Type | Request Body | Data Captured | Storage |
 |---|------|-------------|---------------|---------|
-| 1 | `clearinghouseState` | `{"type":"clearinghouseState","user":"0x45d2...4029"}` | Open positions, leverage, entry price, liquidation price, margin, PnL, account value | `data/positions/` |
-| 2 | `openOrders` | `{"type":"openOrders","user":"0x45d2...4029"}` | Active orders: coin, price, side, size, timestamp | `data/orders/` |
-| 3 | `frontendOpenOrders` | `{"type":"frontendOpenOrders","user":"0x45d2...4029"}` | Orders with trigger conditions, order type, original size | `data/orders/` |
-| 4 | `userFillsByTime` | `{"type":"userFillsByTime","user":"0x45d2...4029","startTime":<last_ts>}` | New trade fills since last check: coin, side, px, sz, fee, closedPnl, dir, crossed | `data/fills/` |
-| 5 | `historicalOrders` | `{"type":"historicalOrders","user":"0x45d2...4029"}` | Completed/cancelled orders with status | `data/orders/` |
-| 6 | `spotClearinghouseState` | `{"type":"spotClearinghouseState","user":"0x45d2...4029"}` | Spot token balances | `data/account/` |
+| 1 | `clearinghouseState` | `{"type":"clearinghouseState","user":"0x8def...2dae"}` | Open positions, leverage, entry price, liquidation price, margin, PnL, account value | `data/positions/` |
+| 2 | `openOrders` | `{"type":"openOrders","user":"0x8def...2dae"}` | Active orders: coin, price, side, size, timestamp | `data/orders/` |
+| 3 | `frontendOpenOrders` | `{"type":"frontendOpenOrders","user":"0x8def...2dae"}` | Orders with trigger conditions, order type, original size | `data/orders/` |
+| 4 | `userFillsByTime` | `{"type":"userFillsByTime","user":"0x8def...2dae","startTime":<last_ts>}` | New trade fills since last check: coin, side, px, sz, fee, closedPnl, dir, crossed | `data/fills/` |
+| 5 | `historicalOrders` | `{"type":"historicalOrders","user":"0x8def...2dae"}` | Completed/cancelled orders with status | `data/orders/` |
+| 6 | `spotClearinghouseState` | `{"type":"spotClearinghouseState","user":"0x8def...2dae"}` | Spot token balances (incl. $HYPE, $HFUN) | `data/account/` |
 
 #### Endpoints Polled Every 15 Minutes
 
 | # | Type | Request Body | Data Captured | Storage |
 |---|------|-------------|---------------|---------|
-| 7 | `userFunding` | `{"type":"userFunding","user":"0x45d2...4029","startTime":<last_ts>}` | Funding payments: coin, rate, size, usdc amount | `data/funding/` |
-| 8 | `userNonFundingLedgerUpdates` | `{"type":"userNonFundingLedgerUpdates","user":"0x45d2...4029","startTime":<last_ts>}` | Deposits, withdrawals, transfers, liquidations | `data/ledger/` |
-| 9 | `userFees` | `{"type":"userFees","user":"0x45d2...4029"}` | Fee schedule, tier, volume, discounts | `data/fees/` |
-| 10 | `userRateLimit` | `{"type":"userRateLimit","user":"0x45d2...4029"}` | Cumulative volume (cumVlm), request usage | `data/rate_limit/` |
+| 7 | `userFunding` | `{"type":"userFunding","user":"0x8def...2dae","startTime":<last_ts>}` | Funding payments: coin, rate, size, usdc amount | `data/funding/` |
+| 8 | `userNonFundingLedgerUpdates` | `{"type":"userNonFundingLedgerUpdates","user":"0x8def...2dae","startTime":<last_ts>}` | Deposits, withdrawals, transfers, liquidations | `data/ledger/` |
+| 9 | `userFees` | `{"type":"userFees","user":"0x8def...2dae"}` | Fee schedule, tier, volume, discounts | `data/fees/` |
+| 10 | `userRateLimit` | `{"type":"userRateLimit","user":"0x8def...2dae"}` | Cumulative volume (cumVlm), request usage | `data/rate_limit/` |
 
 #### Endpoints Polled Every Hour
 
 | # | Type | Request Body | Data Captured | Storage |
 |---|------|-------------|---------------|---------|
-| 11 | `subAccounts` | `{"type":"subAccounts","user":"0x45d2...4029"}` | Linked subaccounts (directly reveals related wallets) | `data/subaccounts/` |
-| 12 | `userVaultEquities` | `{"type":"userVaultEquities","user":"0x45d2...4029"}` | Vault deposits: vault address, equity amount | `data/vaults/` |
-| 13 | `referral` | `{"type":"referral","user":"0x45d2...4029"}` | Referral chain, rewards, referred accounts | `data/referral/` |
-| 14 | `portfolio` | `{"type":"portfolio","user":"0x45d2...4029"}` | Historical account value and PnL curves | `data/account/` |
+| 11 | `subAccounts` | `{"type":"subAccounts","user":"0x8def...2dae"}` | Linked subaccounts (directly reveals related wallets) | `data/subaccounts/` |
+| 12 | `userVaultEquities` | `{"type":"userVaultEquities","user":"0x8def...2dae"}` | Vault deposits: vault address, equity amount | `data/vaults/` |
+| 13 | `referral` | `{"type":"referral","user":"0x8def...2dae"}` | Referral chain, rewards, referred accounts | `data/referral/` |
+| 14 | `portfolio` | `{"type":"portfolio","user":"0x8def...2dae"}` | Historical account value and PnL curves | `data/account/` |
 
 ### 6.2 Arbitrum L1 Fund Flow Tracing
 
@@ -203,9 +206,9 @@ Ezekiel/
 
 | # | Action | URL | Purpose |
 |---|--------|-----|---------|
-| 1 | `txlist` | `?module=account&action=txlist&address=0x45d2...4029&startblock=0&endblock=99999999&sort=desc&offset=100` | All normal transactions |
-| 2 | `tokentx` | `?module=account&action=tokentx&address=0x45d2...4029&startblock=0&endblock=99999999&sort=desc&offset=100` | All ERC-20 token transfers (USDC) |
-| 3 | `txlistinternal` | `?module=account&action=txlistinternal&address=0x45d2...4029&startblock=0&endblock=99999999&sort=desc&offset=100` | Internal transactions |
+| 1 | `txlist` | `?module=account&action=txlist&address=0x8def...2dae&startblock=0&endblock=99999999&sort=desc&offset=100` | All normal transactions |
+| 2 | `tokentx` | `?module=account&action=tokentx&address=0x8def...2dae&startblock=0&endblock=99999999&sort=desc&offset=100` | All ERC-20 token transfers (USDC) |
+| 3 | `txlistinternal` | `?module=account&action=txlistinternal&address=0x8def...2dae&startblock=0&endblock=99999999&sort=desc&offset=100` | Internal transactions |
 
 **Fund Tracing Logic:**
 1. Detect any new USDC transfer OUT from the tracked wallet
@@ -219,7 +222,7 @@ Ezekiel/
 **Leaderboard URL:** `https://stats-data.hyperliquid.xyz/Mainnet/leaderboard`
 **Additional source:** HyperTracker by CoinMarketMan (free, public wallet cohort data)
 
-The scanner pulls leaderboard wallet addresses, then queries `clearinghouseState` and `userFillsByTime` for each candidate to compare against the Ezekiel fingerprint.
+The scanner pulls leaderboard wallet addresses, then queries `clearinghouseState` and `userFillsByTime` for each candidate to compare against the Loracle fingerprint.
 
 ---
 
@@ -232,10 +235,10 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
 ```json
 {
   "version": "1.0",
-  "computed_at": "2026-02-19T00:00:00Z",
+  "computed_at": "2026-05-02T00:00:00Z",
   "data_range": {
     "first_fill": "2024-xx-xxTxx:xx:xxZ",
-    "last_fill": "2026-02-19Txx:xx:xxZ",
+    "last_fill": "2026-05-02Txx:xx:xxZ",
     "total_fills": 12345,
     "total_days_active": 400
   },
@@ -243,34 +246,34 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
   "asset_preferences": {
     "description": "Which coins traded and relative frequency",
     "weight": 0.15,
-    "coins_traded": ["BTC", "ETH", "SOL", "..."],
-    "coin_frequency": {"BTC": 0.35, "ETH": 0.25, "SOL": 0.15},
+    "coins_traded": ["HYPE", "BTC", "ETH", "PAXG", "..."],
+    "coin_frequency": {"HYPE": 0.40, "BTC": 0.20, "ETH": 0.15},
     "never_traded": ["DOGE", "SHIB"],
-    "top_5_by_volume": ["BTC", "ETH", "SOL", "ARB", "AVAX"]
+    "top_5_by_volume": ["HYPE", "BTC", "ETH", "PAXG", "SOL"]
   },
 
   "leverage_profile": {
     "description": "Leverage habits per asset — very hard to change",
     "weight": 0.15,
     "per_coin": {
-      "BTC": {"mean": 10.2, "median": 10, "mode": 10, "std": 2.1, "type": "cross"},
-      "ETH": {"mean": 7.5, "median": 7, "mode": 5, "std": 3.0, "type": "cross"}
+      "HYPE": {"mean": 3.0, "median": 3, "mode": 3, "std": 0.5, "type": "cross"},
+      "BTC": {"mean": 5.0, "median": 5, "mode": 5, "std": 1.0, "type": "cross"}
     },
-    "overall": {"mean": 8.5, "median": 8, "max_ever": 50}
+    "overall": {"mean": 4.0, "median": 3, "max_ever": 10}
   },
 
   "position_sizing": {
     "description": "How large positions are relative to account — subconscious habit",
     "weight": 0.12,
-    "size_to_account_ratio": {"mean": 0.15, "median": 0.12, "std": 0.08},
+    "size_to_account_ratio": {"mean": 0.40, "median": 0.35, "std": 0.15},
     "notional_ranges": {
-      "BTC": {"typical_min_usd": 50000, "typical_max_usd": 500000},
-      "ETH": {"typical_min_usd": 30000, "typical_max_usd": 300000}
+      "HYPE": {"typical_min_usd": 5000000, "typical_max_usd": 60000000},
+      "BTC": {"typical_min_usd": 1000000, "typical_max_usd": 10000000}
     },
     "scaling_behavior": {
       "scales_in": true,
-      "typical_tranches": 3,
-      "tranche_size_pattern": "decreasing"
+      "typical_tranches": 4,
+      "tranche_size_pattern": "increasing"
     }
   },
 
@@ -279,9 +282,9 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
     "weight": 0.15,
     "hourly_distribution": [0.01, 0.01, 0.005, "...24 values..."],
     "day_of_week_distribution": [0.18, 0.16, 0.15, 0.14, 0.15, 0.12, 0.10],
-    "most_active_hours_utc": [14, 15, 16, 17, 18, 19, 20],
+    "most_active_hours_utc": [13, 14, 15, 16, 17, 18, 19, 20],
     "least_active_hours_utc": [2, 3, 4, 5, 6],
-    "inferred_timezone_offset": -5
+    "inferred_timezone_offset": 1
   },
 
   "hold_duration": {
@@ -289,22 +292,22 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
     "weight": 0.10,
     "overall_minutes": {"mean": 4320, "median": 2880, "p25": 720, "p75": 10080},
     "per_coin": {
-      "BTC": {"mean_minutes": 5760, "median_minutes": 4320},
-      "ETH": {"mean_minutes": 2880, "median_minutes": 1440}
+      "HYPE": {"mean_minutes": 14400, "median_minutes": 7200},
+      "BTC": {"mean_minutes": 2880, "median_minutes": 1440}
     },
     "distribution_buckets": {
       "under_1h": 0.05,
-      "1h_to_4h": 0.15,
-      "4h_to_24h": 0.30,
+      "1h_to_4h": 0.10,
+      "4h_to_24h": 0.20,
       "1d_to_7d": 0.35,
-      "over_7d": 0.15
+      "over_7d": 0.30
     }
   },
 
   "entry_exit_style": {
     "description": "Market vs limit, distance from mark, cancel patterns",
     "weight": 0.10,
-    "order_type_ratio": {"market": 0.40, "limit": 0.55, "stop": 0.05},
+    "order_type_ratio": {"market": 0.30, "limit": 0.65, "stop": 0.05},
     "limit_distance_from_mark_bps": {"mean": 15, "median": 10, "std": 12},
     "cancel_rate": 0.25,
     "take_profit_style": "gradual_scale_out",
@@ -316,10 +319,10 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
   "risk_management": {
     "description": "Drawdown behavior, margin utilization, funding sensitivity",
     "weight": 0.08,
-    "max_drawdown_tolerance_pct": 15,
-    "margin_utilization": {"typical": 0.35, "max_observed": 0.85},
+    "max_drawdown_tolerance_pct": 25,
+    "margin_utilization": {"typical": 0.50, "max_observed": 0.90},
     "holds_through_funding": true,
-    "funding_rate_threshold_to_close": 0.01,
+    "funding_rate_threshold_to_close": 0.02,
     "liquidation_count": 0,
     "max_simultaneous_positions": 5
   },
@@ -327,8 +330,8 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
   "trade_sequencing": {
     "description": "Patterns in how trades are ordered and correlated",
     "weight": 0.08,
-    "hedging_frequency": 0.15,
-    "correlated_pairs": [["BTC", "ETH"], ["SOL", "AVAX"]],
+    "hedging_frequency": 0.10,
+    "correlated_pairs": [["BTC", "ETH"]],
     "typical_open_sequence": "largest_first",
     "typical_close_sequence": "winners_first",
     "multi_asset_entry_delay_minutes": 15
@@ -337,13 +340,15 @@ The fingerprint is a JSON object computed daily from ALL collected data. Each di
   "account_characteristics": {
     "description": "Account size and volume bracket",
     "weight": 0.07,
-    "account_value_range_usd": [500000, 2000000],
-    "weekly_volume_usd": {"mean": 5000000, "median": 3500000},
-    "fee_tier": "VIP2",
-    "cumulative_volume": "2854574.59"
+    "account_value_range_usd": [10000000, 80000000],
+    "weekly_volume_usd": {"mean": 50000000, "median": 35000000},
+    "fee_tier": "VIP",
+    "cumulative_volume": "TBD"
   }
 }
 ```
+
+> The example numbers above are placeholders informed by public reporting on Loracle's HYPE-heavy positioning. The fingerprint is *computed* from collected data each run and overwrites any seeded values.
 
 ### 7.2 Similarity Scoring
 
@@ -362,9 +367,9 @@ Each dimension uses an appropriate distance metric:
 - **Entry/exit style:** Euclidean distance on normalized feature vector
 
 **Alert thresholds:**
-- `>= 0.85` similarity: HIGH confidence alert (immediate email)
-- `>= 0.70` similarity: MEDIUM confidence alert (included in daily report)
-- `>= 0.55` similarity: LOW confidence (logged for review)
+- `>= 0.70` similarity: HIGH confidence alert (immediate email)
+- `>= 0.50` similarity: MEDIUM confidence alert (included in daily report)
+- `>= 0.35` similarity: LOW confidence (logged for review)
 
 ---
 
@@ -422,16 +427,16 @@ The next collection cycle uses these cursors as `startTime` to only fetch new da
 |-------|---------|----------|
 | Fund Movement | Any withdrawal/USDC transfer OUT detected on HL or L1 | CRITICAL |
 | New Wallet Found (Direct) | Funds traced from target wallet to new HL deposit | CRITICAL |
-| New Wallet Found (Behavioral) | Wallet scores >= 0.85 similarity | HIGH |
+| New Wallet Found (Behavioral) | Wallet scores >= 0.70 similarity | HIGH |
 | Daily Summary | Cron at 00:00 UTC | NORMAL |
 
 ### 9.3 Email Content
 
 **Fund Movement Alert:**
 ```
-Subject: [EZEKIEL] CRITICAL: Fund Movement Detected
+Subject: [LORACLE] CRITICAL: Fund Movement Detected
 
-Wallet: 0x45d26f28196d226497130c4bac709d808fed4029
+Wallet: 0x8def9f50456c6c4e37fa5d3d57f108ed23992dae
 Event: Withdrawal of $XXX,XXX USDC
 Destination: 0x[destination_address]
 Time: 2026-XX-XX XX:XX UTC
@@ -444,7 +449,7 @@ If destination deposited to Hyperliquid:
 
 **Behavioral Match Alert:**
 ```
-Subject: [EZEKIEL] HIGH: Potential Ezekiel Wallet Detected (87% match)
+Subject: [LORACLE] HIGH: Potential Loracle Wallet Detected (87% match)
 
 Candidate Wallet: 0x[address]
 Similarity Score: 0.87 / 1.00
@@ -452,13 +457,13 @@ Similarity Score: 0.87 / 1.00
 Matching Dimensions:
   - Timing profile: 0.92 (trades same hours)
   - Leverage profile: 0.89 (same leverage per coin)
-  - Asset preferences: 0.88 (same coin selection)
+  - Asset preferences: 0.88 (HYPE-heavy book)
   - Position sizing: 0.85 (same size ratios)
   - Hold duration: 0.82 (similar hold times)
 
 Recent Activity:
-  - Opened 10x long BTC at $XX,XXX
-  - Account size: ~$X,XXX,XXX
+  - Opened 3x long HYPE at $XX
+  - Account size: ~$XX,XXX,XXX
   - Active since: 2026-XX-XX
 ```
 
@@ -468,31 +473,20 @@ Recent Activity:
 
 ```json
 {
-  "target_wallet": "0x45d26f28196d226497130c4bac709d808fed4029",
+  "target_wallet": "0x8def9f50456c6c4e37fa5d3d57f108ed23992dae",
+  "trader_codename": "Loracle",
   "hyperliquid_api": "https://api.hyperliquid.xyz/info",
   "leaderboard_url": "https://stats-data.hyperliquid.xyz/Mainnet/leaderboard",
   "etherscan_v2_base": "https://api.etherscan.io/v2/api",
   "arbitrum_chain_id": 42161,
   "hl_bridge_contract": "0x2df1c51e09aecf9cacb7bc98cb1742757f163df7",
   "usdc_contract_arbitrum": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+  "hip3_dexes": ["xyz"],
+  "twitter_accounts": ["loraclexyz"],
   "alert_thresholds": {
-    "similarity_high": 0.85,
-    "similarity_medium": 0.70,
-    "similarity_low": 0.55
-  },
-  "collection_intervals": {
-    "positions_and_fills_minutes": 5,
-    "funding_and_ledger_minutes": 15,
-    "subaccounts_and_vaults_minutes": 60,
-    "l1_trace_minutes": 15,
-    "scanner_minutes": 60,
-    "fingerprint_rebuild_hours": 24
-  },
-  "email": {
-    "smtp_host": "smtp-relay.brevo.com",
-    "smtp_port": 587,
-    "from": "ezekiel@alerts.dev",
-    "to": "<USER_EMAIL>"
+    "similarity_high": 0.70,
+    "similarity_medium": 0.50,
+    "similarity_low": 0.35
   },
   "scanner": {
     "max_leaderboard_wallets": 500,
@@ -666,6 +660,7 @@ jobs:
 | Email | `smtplib` (stdlib) + Brevo SMTP |
 | Scheduling | GitHub Actions cron |
 | Git Automation | `stefanzweifel/git-auto-commit-action@v5` |
+| Dashboard | SvelteKit (Svelte 5) + Vite + Chart.js, deployed to GitHub Pages |
 
 ---
 
@@ -696,17 +691,20 @@ jobs:
 
 ### 16.1 Design Principle
 
-The wallet and Twitter accounts are tracked as **separate, independent entities**. The GCR hypothesis is unconfirmed. The system:
-- Collects Twitter data independently of wallet data
-- Runs **correlation analysis** to test whether the accounts are linked
-- Never assumes linkage — only reports statistical evidence
+Loracle's wallet ↔ Twitter linkage is **publicly self-disclosed** (`@loraclexyz` = Laurent Zeimes = `0x8def...2dae`). The system therefore treats them as a confirmed pair and uses Twitter as:
+
+1. A **leading indicator** for trades (does he tweet about HYPE before opening / sizing up positions?)
+2. A **forensic anchor** if a new candidate wallet appears — does it consistently trade behind the same tweet stream?
+
+The system still computes a correlation score, but it is used to *characterize* the tweet→trade lag pattern (which is itself a fingerprint dimension), not to test whether the accounts belong to the same person.
 
 ### 16.2 Twitter Accounts Monitored
 
 | Account | Role | Status |
 |---------|------|--------|
-| `@GiganticRebirth` | Primary account of interest | Rarely active |
-| `@GCRClassic` | Secondary account of interest | Rarely active |
+| `@loraclexyz` | Primary self-identified Loracle account | Active |
+
+If additional handles or aliases are confirmed (e.g. project accounts like `@Hypurrfun`, or alt-personal accounts), add them to `config.json -> twitter_accounts`.
 
 ### 16.3 Data Collection Method
 
@@ -714,24 +712,24 @@ The wallet and Twitter accounts are tracked as **separate, independent entities*
 
 | Method | Implementation | Schedule |
 |--------|---------------|----------|
-| **RSS Bridge** | Use `rss.app` or `nitter.net` RSS feeds to monitor new tweets | Every hour via GitHub Actions |
-| **Historical Archive** | User-provided research docs (`research/GCR.docx`, `research/Trade Reviews.pdf`) | Parsed once, updated manually |
-| **Wayback Machine API** | `https://web.archive.org/web/timemap/json?url=twitter.com/GiganticRebirth` | One-time backfill |
+| **RSS Bridge** | Use Nitter / `rss.app` RSS feeds to monitor new tweets | Every hour via GitHub Actions |
+| **Historical Archive** | User-provided research docs (`research/*.docx`, `research/*.pdf`) | Parsed once, updated manually |
+| **Wayback Machine API** | `https://web.archive.org/web/timemap/json?url=twitter.com/loraclexyz` | One-time backfill |
 
 ### 16.4 Data Captured Per Tweet
 
 ```json
 {
-  "source_account": "@GiganticRebirth",
+  "source_account": "@loraclexyz",
   "tweet_id": "1234567890",
-  "timestamp": "2026-02-19T14:32:00Z",
+  "timestamp": "2026-05-02T14:32:00Z",
   "text": "Full tweet text",
   "has_trading_content": true,
-  "mentioned_coins": ["BTC", "ETH"],
+  "mentioned_coins": ["HYPE"],
   "sentiment": "bullish",
   "mentioned_direction": "long",
   "mentioned_leverage": null,
-  "mentioned_target": "$120K"
+  "mentioned_target": "$60"
 }
 ```
 
@@ -739,28 +737,26 @@ The wallet and Twitter accounts are tracked as **separate, independent entities*
 
 The system computes a **tweet-to-trade correlation score** by comparing:
 
-1. **Timing correlation:** When a tweet mentions a coin, did the Ezekiel wallet open/close a position on that coin within a time window (e.g., 1h before to 4h after)?
-2. **Direction correlation:** If a tweet says "bullish BTC", did the wallet go long BTC?
+1. **Timing correlation:** When a tweet mentions a coin, did the Loracle wallet open/close a position on that coin within a time window (e.g., 1h before to 4h after)?
+2. **Direction correlation:** If a tweet says "bullish HYPE", did the wallet go long HYPE?
 3. **Volume correlation:** Does trading volume spike around tweet times?
-
-If correlations are consistently strong, this provides evidence that the wallet and Twitter accounts belong to the same person. If correlations are weak or random, they likely don't.
 
 **Output:** `profile/twitter_correlation.json`
 
 ```json
 {
-  "hypothesis": "Wallet owner is @GiganticRebirth / @GCRClassic",
+  "subject": "@loraclexyz tweet → wallet trade alignment",
   "confidence": "LOW | MEDIUM | HIGH",
   "evidence": {
     "timing_correlation": 0.72,
     "direction_correlation": 0.85,
     "sample_size": 45,
-    "time_range": "2024-06-15 to 2026-02-19"
+    "time_range": "2024-10-01 to 2026-05-02"
   },
   "notable_matches": [
     {
-      "tweet": "@GiganticRebirth tweeted 'BTC looks ready' at 14:32 UTC",
-      "trade": "Wallet opened 10x long BTC at 14:47 UTC (15 min later)",
+      "tweet": "@loraclexyz tweeted 'HYPE looking strong' at 14:32 UTC",
+      "trade": "Wallet added 3x long HYPE at 14:47 UTC (15 min later)",
       "correlation_type": "timing + direction"
     }
   ]
@@ -769,10 +765,10 @@ If correlations are consistently strong, this provides evidence that the wallet 
 
 ### 16.6 How This Helps Find Future Wallets
 
-Even if the trader switches wallets, if they continue tweeting (from any account):
-- We can compare new tweet timestamps against trading activity on candidate wallets
-- A new wallet that consistently trades 10-30 min after tweets from a specific account is a strong signal
-- This works as an **independent verification layer** alongside the behavioral fingerprint
+If Loracle spins up a new wallet but keeps tweeting from `@loraclexyz`:
+- Compare new tweet timestamps against trading activity on candidate wallets
+- A new wallet that consistently trades 10–30 min after his tweets is a strong signal
+- This is an **independent verification layer** alongside the behavioral fingerprint
 
 ### 16.7 Storage
 
@@ -782,24 +778,12 @@ data/
 │   ├── tweets/                    # Raw tweet data by date
 │   │   └── YYYY-MM-DD.json
 │   ├── archive/                   # Historical tweet backfill
-│   │   ├── giganticrebirth.json
-│   │   └── gcrclassic.json
+│   │   └── loraclexyz.json
 │   └── correlation/               # Correlation analysis results
 │       └── latest.json
 ```
 
-### 16.8 Workflow Addition
-
-```yaml
-# Added to analyze.yml (daily) or as separate workflow
-- name: Fetch new tweets
-  run: python src/twitter_monitor.py
-
-- name: Run correlation analysis
-  run: python src/twitter_correlator.py
-```
-
-### 16.9 New Python Modules
+### 16.8 New Python Modules
 
 | Module | Purpose |
 |--------|---------|
@@ -812,11 +796,11 @@ data/
 
 1. **Cross-DEX monitoring:** Check if the wallet or fund-traced wallets appear on other perp DEXes (dYdX, GMX, Vertex). Same trader often trades across platforms.
 
-2. **Cross-DEX monitoring:** Check if the wallet or fund-traced wallets appear on other perp DEXes (dYdX, GMX, Vertex). Same trader often trades across platforms.
+2. **Hypurrfun / HyperActive entity tracking:** Loracle is the founder of Hypurrfun and (hyper/active) capital. Wallets associated with those projects (treasury, deployer, fee recipient) should be monitored — funds flowing between them and the personal wallet are diagnostic.
 
 3. **Arkham Intelligence integration:** If Arkham labels this wallet or linked wallets, it can provide entity information. Free tier provides basic labels.
 
-4. **HyperTracker cohort analysis:** CoinMarketMan's HyperTracker groups wallets by PnL and size cohorts. Monitor which cohort GCR falls into, then watch for new wallets entering that exact cohort.
+4. **HyperTracker cohort analysis:** CoinMarketMan's HyperTracker groups wallets by PnL and size cohorts. Loracle is consistently in the top-PnL public-figure cohort — monitor for new wallets entering that exact cohort.
 
 5. **Transaction timing microstructure:** Analyze the exact millisecond-level timestamps of transactions. Infrastructure-dependent patterns (bot latency, manual click patterns) are unique.
 
@@ -826,9 +810,11 @@ data/
 
 8. **Deposit source analysis:** When the wallet receives deposits, trace where the USDC came from. The funding source address pattern is an identity signal.
 
+9. **Second-wallet hypothesis tracking:** Public reporting (e.g. 247 Research) has flagged a second Loracle wallet used to long HYPE. Maintain a `known_alts.json` list of confirmed/likely alts and run the same collection against each.
+
 ---
 
-## 17. Success Criteria
+## 18. Success Criteria
 
 - [ ] All available historical data captured within 24 hours of deployment
 - [ ] Zero data gaps in ongoing collection (no missed fills, funding, or ledger entries)

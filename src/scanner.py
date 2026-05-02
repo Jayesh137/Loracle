@@ -1,5 +1,5 @@
 # src/scanner.py
-"""Scans Hyperliquid leaderboard for wallets matching the Ezekiel fingerprint."""
+"""Scans Hyperliquid leaderboard for wallets matching the Loracle fingerprint."""
 
 import json
 import sys
@@ -129,33 +129,33 @@ def compare_leverage(fp_a: dict, fp_b: dict) -> float:
     return 1.0 - abs(mean_a - mean_b) / max_val
 
 
-def compute_similarity(ezekiel_fp: dict, candidate_fp: dict) -> tuple[float, dict]:
-    """Compute weighted similarity between Ezekiel and a candidate fingerprint."""
+def compute_similarity(loracle_fp: dict, candidate_fp: dict) -> tuple[float, dict]:
+    """Compute weighted similarity between Loracle and a candidate fingerprint."""
     dimensions = {}
 
     # Asset preferences
     dim_score = compare_asset_preferences(
-        ezekiel_fp.get("asset_preferences", {}),
+        loracle_fp.get("asset_preferences", {}),
         candidate_fp.get("asset_preferences", {})
     )
     dimensions["asset_preferences"] = round(dim_score, 4)
 
     # Timing profile
     dim_score = compare_timing_profiles(
-        ezekiel_fp.get("timing_profile", {}),
+        loracle_fp.get("timing_profile", {}),
         candidate_fp.get("timing_profile", {})
     )
     dimensions["timing_profile"] = round(dim_score, 4)
 
     # Leverage
     dim_score = compare_leverage(
-        ezekiel_fp.get("leverage_profile", {}),
+        loracle_fp.get("leverage_profile", {}),
         candidate_fp.get("leverage_profile", {})
     )
     dimensions["leverage_profile"] = round(dim_score, 4)
 
     # Entry/exit style (market/limit ratio similarity)
-    style_a = ezekiel_fp.get("entry_exit_style", {}).get("order_type_ratio", {})
+    style_a = loracle_fp.get("entry_exit_style", {}).get("order_type_ratio", {})
     style_b = candidate_fp.get("entry_exit_style", {}).get("order_type_ratio", {})
     if style_a and style_b:
         vec_a = [style_a.get("market", 0), style_a.get("limit", 0)]
@@ -165,7 +165,7 @@ def compute_similarity(ezekiel_fp: dict, candidate_fp: dict) -> tuple[float, dic
         dimensions["entry_exit_style"] = 0.0
 
     # Hold duration buckets
-    buckets_a = ezekiel_fp.get("hold_duration", {}).get("distribution_buckets", {})
+    buckets_a = loracle_fp.get("hold_duration", {}).get("distribution_buckets", {})
     buckets_b = candidate_fp.get("hold_duration", {}).get("distribution_buckets", {})
     if buckets_a and buckets_b:
         keys = sorted(set(list(buckets_a.keys()) + list(buckets_b.keys())))
@@ -249,15 +249,15 @@ def scan_leaderboard():
     thresholds = config["alert_thresholds"]
     scanner_config = config["scanner"]
 
-    # Load or build Ezekiel fingerprint
+    # Load or build Loracle fingerprint
     fp_path = Path(DATA_DIR.parent / "profile" / "fingerprint.json")
     if fp_path.exists():
         with open(fp_path) as f:
-            ezekiel_fp = json.load(f)
+            loracle_fp = json.load(f)
         print("[scanner] Loaded existing fingerprint")
     else:
         print("[scanner] No fingerprint found, building...")
-        ezekiel_fp = build_fingerprint()
+        loracle_fp = build_fingerprint()
 
     # Fetch leaderboard
     leaderboard = fetch_leaderboard()
@@ -288,7 +288,7 @@ def scan_leaderboard():
         state = get_candidate_state(wallet)
         candidate_fp = build_candidate_fingerprint(fills, state)
 
-        score, dimensions = compute_similarity(ezekiel_fp, candidate_fp)
+        score, dimensions = compute_similarity(loracle_fp, candidate_fp)
 
         result = {
             "wallet": wallet,

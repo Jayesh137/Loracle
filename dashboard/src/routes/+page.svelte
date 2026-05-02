@@ -357,7 +357,7 @@
 <div class="page-header">
 	<h1>Dashboard</h1>
 	<p class="text-muted">
-		Tracking <span class="mono text-blue">{shortAddr('0x45d26f28196d226497130c4bac709d808fed4029')}</span>
+		Tracking <span class="mono text-blue">{shortAddr('0x8def9f50456c6c4e37fa5d3d57f108ed23992dae')}</span>
 	</p>
 </div>
 

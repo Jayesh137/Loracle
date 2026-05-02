@@ -1,5 +1,5 @@
 # src/utils.py
-"""Core utilities for the Ezekiel trader intelligence system."""
+"""Core utilities for the Loracle trader intelligence system."""
 
 import json
 import os

@@ -2,7 +2,7 @@
 // Data fetching utility — reads JSON from GitHub raw content
 
 const OWNER = 'Jayesh137';
-const REPO = 'Ezekiel';
+const REPO = 'Loracle';
 const BRANCH = 'main';
 const RAW_BASE = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}`;
 

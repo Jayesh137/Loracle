@@ -14,8 +14,8 @@
 <div class="app-shell">
 	<nav class="sidebar">
 		<div class="sidebar-header">
-			<span class="logo">EZK</span>
-			<span class="logo-sub">EZEKIEL</span>
+			<span class="logo">LOR</span>
+			<span class="logo-sub">LORACLE</span>
 		</div>
 		<ul class="nav-list">
 			{#each navItems as item}

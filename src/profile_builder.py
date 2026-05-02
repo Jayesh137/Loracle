@@ -155,7 +155,7 @@ def build_profile():
     profile_dir = str(DATA_DIR.parent / "profile")
 
     profile = {
-        "codename": "Ezekiel",
+        "codename": "Loracle",
         "built_at": datetime.now(timezone.utc).isoformat(),
         "sources": [],
         "aggregated_patterns": {

@@ -1,13 +1,13 @@
-# Ezekiel: System Architecture
+# Loracle: System Architecture
 
-> Technical architecture for the Ezekiel trader intelligence and fingerprinting system.
+> Technical architecture for the Loracle trader intelligence and fingerprinting system.
 > Companion to [PRD.md](../../PRD.md).
 
 ---
 
 ## 1. System Overview
 
-Ezekiel is a three-tier system:
+Loracle is a three-tier system:
 
 1. **Backend** (Python) — Data collection, fingerprinting, scanning, tracing, alerts. Runs headless on GitHub Actions 24/7.
 2. **Dashboard** (SvelteKit + Vite) — Visual interface for exploring collected data, the behavioral fingerprint, scanner results, and fund flows. Static site deployed to GitHub Pages.
@@ -56,7 +56,7 @@ Ezekiel is a three-tier system:
 ## 2. Updated Project Structure
 
 ```
-Ezekiel/
+Loracle/
 ├── .github/
 │   └── workflows/
 │       ├── collect.yml              # Cron: every 5 min
@@ -134,7 +134,7 @@ Ezekiel/
 │   │   └── correlation/             # Tweet-to-trade correlation results
 │   └── state/
 │
-├── research/                        # User's GCR research docs
+├── research/                        # User's Loracle research docs
 ├── profile/                         # Computed fingerprint + profile
 ├── reports/                         # Daily summary reports
 ├── config.json
@@ -164,14 +164,13 @@ src/
 └── utils.py                ─── Shared: API calls, file I/O, dedup, cursors
 ```
 
-### 3.3 Key Design Principle: Separate Entities
+### 3.3 Key Design Principle: Confirmed Identity, Forensic Use of Twitter
 
-The wallet and Twitter accounts are tracked as **independent entities**. The system does NOT assume they belong to the same person. Instead:
+Loracle's wallet ↔ Twitter linkage is publicly self-disclosed (`@loraclexyz` = Laurent Zeimes). The system therefore:
 
 - **Wallet fingerprint** = built purely from on-chain Hyperliquid data
 - **Twitter profile** = built independently from tweet content and timing
-- **Correlation analysis** = statistical test of whether the two are linked
-- The GCR hypothesis is treated as testable, not assumed
+- **Correlation analysis** = characterizes the tweet→trade lag pattern (itself a useful fingerprint dimension) and acts as a forensic anchor for *future* candidate wallets — does a new wallet trade behind the same tweet stream?
 
 ### 3.2 utils.py — Core Abstractions
 
@@ -291,7 +290,7 @@ const config = {
       strict: false
     }),
     paths: {
-      base: process.argv.includes('dev') ? '' : '/Ezekiel'
+      base: process.argv.includes('dev') ? '' : '/Loracle'
     }
   }
 };
@@ -322,7 +321,7 @@ The dashboard is a **static SPA** that fetches JSON data at runtime from the sam
 ```javascript
 // dashboard/src/lib/api.js
 
-const REPO = 'YOUR_USERNAME/Ezekiel';
+const REPO = 'YOUR_USERNAME/Loracle';
 const BRANCH = 'main';
 const BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`;
 
@@ -353,7 +352,7 @@ export async function fetchJSON(path) {
 #### Home (`/`) — Live Overview
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  EZEKIEL — Trader Intelligence Dashboard                     │
+│  LORACLE — Trader Intelligence Dashboard                     │
 ├─────────┬───────────────────────────────────────────────────┤
 │         │                                                    │
 │  NAV    │  ┌─────────────────┐  ┌─────────────────────────┐│
@@ -396,7 +395,7 @@ export async function fetchJSON(path) {
 - Table of candidate wallets ranked by similarity score
 - Color-coded: red (>0.85), yellow (>0.70), grey (<0.70)
 - Click a wallet to expand: shows which dimensions match
-- Side-by-side comparison: Ezekiel fingerprint vs candidate
+- Side-by-side comparison: Loracle fingerprint vs candidate
 
 #### Fund Flow (`/fund-flow`) — L1 Transaction Tracing
 - Timeline of all deposits/withdrawals
@@ -405,10 +404,10 @@ export async function fetchJSON(path) {
 - Status badges: TRACED / PENDING / NO HL DEPOSIT
 
 #### Twitter Intel (`/twitter`) — Social Media Correlation
-- Tweet timeline for @GiganticRebirth and @GCRClassic
+- Tweet timeline for @loraclexyz
 - Overlay: tweet timestamps vs trade timestamps on same chart
-- Correlation score dashboard: timing, direction, confidence level
-- **Hypothesis status badge**: LOW / MEDIUM / HIGH confidence that wallet = GCR
+- Correlation score dashboard: timing, direction, lag distribution
+- **Tweet→trade lag profile**: median minutes from tweet to executed fill (used as a forensic anchor for finding alt wallets)
 - Individual correlation matches (tweet X → trade Y, N minutes apart)
 
 #### Reports (`/reports`) — Daily Summaries
@@ -566,7 +565,7 @@ Each collection cycle generates `data/index.json` — a manifest of all availabl
 ```json
 {
   "last_updated": "2026-02-19T14:35:00Z",
-  "wallet": "0x45d26f28196d226497130c4bac709d808fed4029",
+  "wallet": "0x8def9f50456c6c4e37fa5d3d57f108ed23992dae",
   "data_range": {
     "first_record": "2024-06-15T00:00:00Z",
     "last_record": "2026-02-19T14:30:00Z"
@@ -752,7 +751,7 @@ No secrets needed for the dashboard — it reads public repo data.
 | API keys in workflows | Stored in GitHub Secrets, never in code |
 | Email address exposure | Stored in GitHub Secrets, never in code |
 | Dashboard has no auth | Read-only, displays only public blockchain data |
-| Research docs (GCR.docx, Trade Reviews.pdf) | In `research/` — acceptable since trader identity is public (GCR) |
+| Research docs (Loracle commentary, Trade Reviews.pdf) | In `research/` — acceptable since trader identity is publicly self-disclosed (Laurent Zeimes / @loraclexyz) |
 | Git commit spam (every 5 min) | Automated commits only to `data/` — main code stays clean |
 
 ---
