@@ -1,30 +1,33 @@
 {
   "version": "1.0",
-  "computed_at": "2026-05-04T02:29:33.202650+00:00",
+  "computed_at": "2026-05-05T02:24:35.651135+00:00",
   "data_range": {
     "first_fill": "2026-05-01T20:03:41.142000+00:00",
-    "last_fill": "2026-05-04T00:00:40.186000+00:00",
-    "total_fills": 44335,
-    "total_days_active": 2
+    "last_fill": "2026-05-05T01:09:41.871000+00:00",
+    "total_fills": 70215,
+    "total_days_active": 3
   },
   "asset_preferences": {
     "weight": 0.15,
     "coins_traded": [
       "@107",
       "HYPE",
-      "ZEC"
+      "ZEC",
+      "xyz:BRENTOIL"
     ],
     "coin_frequency": {
-      "@107": 0.7927,
-      "HYPE": 0.1605,
-      "ZEC": 0.0468
+      "@107": 0.7525,
+      "ZEC": 0.1393,
+      "HYPE": 0.1045,
+      "xyz:BRENTOIL": 0.0037
     },
     "top_5_by_volume": [
       "@107",
-      "HYPE",
-      "ZEC"
+      "ZEC",
+      "xyz:BRENTOIL",
+      "HYPE"
     ],
-    "total_unique_coins": 3
+    "total_unique_coins": 4
   },
   "leverage_profile": {
     "weight": 0.15,
@@ -64,69 +67,74 @@
     "weight": 0.12,
     "notional_ranges": {
       "@107": {
-        "typical_min_usd": 101.81,
-        "typical_max_usd": 407.61,
-        "mean_usd": 261.83
+        "typical_min_usd": 49.67,
+        "typical_max_usd": 431.83,
+        "mean_usd": 271.64
       },
       "HYPE": {
-        "typical_min_usd": 44.24,
-        "typical_max_usd": 482.06,
-        "mean_usd": 285.66
+        "typical_min_usd": 45.5,
+        "typical_max_usd": 482.21,
+        "mean_usd": 286.93
       },
       "ZEC": {
-        "typical_min_usd": 74.27,
-        "typical_max_usd": 859.88,
-        "mean_usd": 418.16
+        "typical_min_usd": 94.53,
+        "typical_max_usd": 1419.81,
+        "mean_usd": 743.48
+      },
+      "xyz:BRENTOIL": {
+        "typical_min_usd": 10.24,
+        "typical_max_usd": 35007.52,
+        "mean_usd": 15276.33
       }
     },
     "size_to_account_ratio": {
       "mean": 0.0,
       "median": 0.0,
-      "std": 0.0
+      "std": 0.0002
     },
-    "account_value_usd": 13816462.87
+    "account_value_usd": 12611275.72
   },
   "timing_profile": {
     "weight": 0.15,
     "hourly_distribution": [
+      0.0478,
+      0.0413,
+      0.0408,
+      0.0465,
+      0.0532,
+      0.0456,
+      0.0564,
+      0.06,
+      0.0274,
+      0.0288,
+      0.033,
       0.0318,
-      0.0319,
-      0.036,
-      0.0405,
-      0.0464,
-      0.0371,
-      0.0463,
-      0.0362,
-      0.0247,
-      0.0304,
-      0.0316,
-      0.0348,
-      0.0317,
-      0.0358,
-      0.0384,
-      0.0482,
-      0.0445,
-      0.0327,
-      0.0314,
-      0.0314,
-      0.0745,
-      0.0731,
-      0.0649,
-      0.0658
+      0.0302,
+      0.0331,
+      0.0364,
+      0.0406,
+      0.0385,
+      0.0309,
+      0.0302,
+      0.0306,
+      0.0576,
+      0.0564,
+      0.0516,
+      0.0515
     ],
     "day_of_week_distribution": [
-      0.0004,
+      0.3569,
+      0.0119,
       0.0,
       0.0,
-      0.0,
-      0.106,
-      0.3547,
-      0.5389
+      0.0669,
+      0.224,
+      0.3403
     ],
     "most_active_hours_utc": [
       4,
       6,
-      15,
+      7,
       20,
       21,
       22,
@@ -135,11 +143,11 @@
     "least_active_hours_utc": [
       8,
       9,
-      10,
+      12,
       18,
       19
     ],
-    "inferred_timezone_offset": -4
+    "inferred_timezone_offset": 9
   },
   "hold_duration": {
     "weight": 0.1,
@@ -156,33 +164,33 @@
   "entry_exit_style": {
     "weight": 0.1,
     "order_type_ratio": {
-      "market": 0.9702,
-      "limit": 0.0298
+      "market": 0.8974,
+      "limit": 0.1026
     },
     "take_profit_pnl": {
-      "mean": 10.37,
-      "median": 10.34
+      "mean": 11.66,
+      "median": 11.38
     },
     "stop_loss_pnl": {
-      "mean": -2.05,
-      "median": -2.01
+      "mean": -2.07,
+      "median": -2.04
     },
     "fee_stats": {
-      "total": 4968.03,
-      "mean": 0.1121
+      "total": 7816.09,
+      "mean": 0.1113
     },
-    "total_closed_trades": 44335,
-    "win_rate": 0.7927
+    "total_closed_trades": 70215,
+    "win_rate": 0.7525
   },
   "risk_management": {
     "weight": 0.08,
-    "margin_utilization": 0.6145,
-    "account_value_usd": 13816462.87,
-    "total_margin_used": 8490462.14,
+    "margin_utilization": 0.735,
+    "account_value_usd": 12611275.72,
+    "total_margin_used": 9269470.86,
     "current_positions_count": 6,
     "max_simultaneous_positions": 6,
     "holds_through_funding": true,
-    "total_funding_events": 524
+    "total_funding_events": 540
   },
   "trade_sequencing": {
     "weight": 0.08,
@@ -191,15 +199,15 @@
       "median_minutes": 0.1
     },
     "buy_sell_ratio": {
-      "buy_pct": 0.2073,
-      "sell_pct": 0.7927
+      "buy_pct": 0.2438,
+      "sell_pct": 0.7562
     },
-    "total_fills": 44335
+    "total_fills": 70215
   },
   "account_characteristics": {
     "weight": 0.07,
-    "account_value_usd": 13816462.87,
-    "total_volume_usd": 12102312.56,
-    "weekly_volume_usd": 12102312.56
+    "account_value_usd": 12611275.72,
+    "total_volume_usd": 27731329.73,
+    "weekly_volume_usd": 27731329.73
   }
 }
