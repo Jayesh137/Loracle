@@ -1,17 +1,19 @@
 {
   "version": "1.0",
-  "computed_at": "2026-05-09T02:30:23.933038+00:00",
+  "computed_at": "2026-05-10T02:34:07.160636+00:00",
   "data_range": {
     "first_fill": "2026-05-01T20:03:41.142000+00:00",
-    "last_fill": "2026-05-08T19:50:50.605000+00:00",
-    "total_fills": 105593,
-    "total_days_active": 6
+    "last_fill": "2026-05-09T17:42:49.563000+00:00",
+    "total_fills": 138064,
+    "total_days_active": 7
   },
   "asset_preferences": {
     "weight": 0.15,
     "coins_traded": [
       "@107",
       "AZTEC",
+      "BTC",
+      "CHIP",
       "HYPE",
       "LIT",
       "NEAR",
@@ -22,33 +24,31 @@
       "xyz:CL"
     ],
     "coin_frequency": {
-      "@107": 0.569,
-      "TON": 0.1388,
-      "ZEC": 0.0926,
-      "HYPE": 0.0784,
-      "AZTEC": 0.055,
-      "NEAR": 0.0424,
-      "xyz:CL": 0.0162,
-      "xyz:BRENTOIL": 0.0058,
-      "XPL": 0.0017,
+      "@107": 0.4352,
+      "TON": 0.1663,
+      "ZEC": 0.1426,
+      "HYPE": 0.0907,
+      "NEAR": 0.0511,
+      "AZTEC": 0.0421,
+      "BTC": 0.0417,
+      "xyz:CL": 0.0124,
+      "CHIP": 0.0122,
+      "xyz:BRENTOIL": 0.0044,
+      "XPL": 0.0013,
       "LIT": 0.0
     },
     "top_5_by_volume": [
       "@107",
-      "xyz:CL",
-      "xyz:BRENTOIL",
+      "ZEC",
+      "TON",
       "HYPE",
-      "TON"
+      "xyz:CL"
     ],
-    "total_unique_coins": 10
+    "total_unique_coins": 12
   },
   "leverage_profile": {
     "weight": 0.15,
     "per_coin": {
-      "BTC": {
-        "value": 20.0,
-        "type": "cross"
-      },
       "TON": {
         "value": 5.0,
         "type": "cross"
@@ -83,9 +83,9 @@
       }
     },
     "overall": {
-      "mean": 7.22,
+      "mean": 5.62,
       "median": 5.0,
-      "max": 20.0
+      "max": 10.0
     }
   },
   "position_sizing": {
@@ -97,14 +97,14 @@
         "mean_usd": 284.79
       },
       "HYPE": {
-        "typical_min_usd": 46.99,
-        "typical_max_usd": 524.82,
-        "mean_usd": 1221.61
+        "typical_min_usd": 54.11,
+        "typical_max_usd": 1754.33,
+        "mean_usd": 1181.32
       },
       "ZEC": {
-        "typical_min_usd": 94.53,
-        "typical_max_usd": 1419.81,
-        "mean_usd": 743.48
+        "typical_min_usd": 75.25,
+        "typical_max_usd": 1585.7,
+        "mean_usd": 785.36
       },
       "xyz:BRENTOIL": {
         "typical_min_usd": 10.78,
@@ -112,14 +112,14 @@
         "mean_usd": 16633.76
       },
       "TON": {
-        "typical_min_usd": 50.0,
-        "typical_max_usd": 1585.72,
-        "mean_usd": 665.93
+        "typical_min_usd": 30.95,
+        "typical_max_usd": 1489.42,
+        "mean_usd": 658.22
       },
       "NEAR": {
-        "typical_min_usd": 19.21,
-        "typical_max_usd": 807.9,
-        "mean_usd": 407.18
+        "typical_min_usd": 11.65,
+        "typical_max_usd": 751.42,
+        "mean_usd": 350.68
       },
       "XPL": {
         "typical_min_usd": 69.09,
@@ -140,86 +140,104 @@
         "typical_min_usd": 11.99,
         "typical_max_usd": 208.09,
         "mean_usd": 72.14
+      },
+      "BTC": {
+        "typical_min_usd": 57.99,
+        "typical_max_usd": 3026.78,
+        "mean_usd": 2129.67
+      },
+      "CHIP": {
+        "typical_min_usd": 49.99,
+        "typical_max_usd": 223.0,
+        "mean_usd": 145.66
       }
     },
     "size_to_account_ratio": {
       "mean": 0.0,
       "median": 0.0,
-      "std": 0.0003
+      "std": 0.0002
     },
-    "account_value_usd": 44384222.68
+    "account_value_usd": 44771044.81
   },
   "timing_profile": {
     "weight": 0.15,
     "hourly_distribution": [
-      0.0366,
-      0.04,
-      0.0391,
+      0.028,
+      0.0306,
+      0.0299,
+      0.033,
+      0.0379,
+      0.034,
+      0.046,
+      0.066,
+      0.0565,
+      0.0562,
       0.0431,
-      0.0496,
-      0.0445,
-      0.0555,
-      0.0613,
-      0.0453,
-      0.0409,
-      0.0449,
-      0.0439,
-      0.0569,
-      0.0358,
-      0.0399,
-      0.0421,
-      0.0329,
-      0.0267,
-      0.0267,
-      0.0292,
-      0.0434,
-      0.0432,
-      0.0385,
-      0.04
+      0.0458,
+      0.0533,
+      0.0466,
+      0.045,
+      0.0609,
+      0.0673,
+      0.0509,
+      0.0204,
+      0.0224,
+      0.0332,
+      0.033,
+      0.0294,
+      0.0306
     ],
     "day_of_week_distribution": [
-      0.2373,
-      0.1102,
-      0.1583,
-      0.0195,
-      0.0995,
-      0.1489,
-      0.2263
+      0.1815,
+      0.0843,
+      0.1211,
+      0.0149,
+      0.0761,
+      0.3491,
+      0.1731
     ],
     "most_active_hours_utc": [
-      4,
-      5,
-      6,
       7,
       8,
-      10,
-      12
+      9,
+      12,
+      15,
+      16,
+      17
     ],
     "least_active_hours_utc": [
-      13,
-      16,
-      17,
+      0,
+      2,
       18,
-      19
+      19,
+      22
     ],
-    "inferred_timezone_offset": 9
+    "inferred_timezone_offset": 0
   },
   "hold_duration": {
     "weight": 0.1,
     "overall_minutes": {
-      "mean": 946.9,
-      "median": 1.4,
-      "p25": 0.5,
-      "p75": 947.8
+      "mean": 2700.8,
+      "median": 3689.9,
+      "p25": 1.4,
+      "p75": 4044.0
     },
     "per_coin": {
+      "ZEC": {
+        "mean_minutes": 7124.9,
+        "median_minutes": 7124.9
+      },
       "xyz:BRENTOIL": {
         "mean_minutes": 3784.5,
         "median_minutes": 3784.5
       },
       "TON": {
-        "mean_minutes": 1.4,
-        "median_minutes": 1.4
+        "mean_minutes": 1230.9,
+        "median_minutes": 2.2
+      },
+      "NEAR": {
+        "mean_minutes": 4303.5,
+        "median_minutes": 4303.5
       },
       "AZTEC": {
         "mean_minutes": 0.1,
@@ -227,43 +245,43 @@
       }
     },
     "distribution_buckets": {
-      "under_1h": 0.75,
+      "under_1h": 0.4286,
       "1h_to_4h": 0.0,
       "4h_to_24h": 0.0,
-      "1d_to_7d": 0.25,
+      "1d_to_7d": 0.5714,
       "over_7d": 0.0
     }
   },
   "entry_exit_style": {
     "weight": 0.1,
     "order_type_ratio": {
-      "market": 0.8003,
-      "limit": 0.1997
+      "market": 0.8396,
+      "limit": 0.1604
     },
     "take_profit_pnl": {
-      "mean": 62.59,
-      "median": 12.14
+      "mean": 87.83,
+      "median": 14.1
     },
     "stop_loss_pnl": {
-      "mean": -2.07,
-      "median": -2.04
+      "mean": -4.94,
+      "median": -2.43
     },
     "fee_stats": {
-      "total": 11066.64,
-      "mean": 0.1048
+      "total": 20640.96,
+      "mean": 0.1495
     },
-    "total_closed_trades": 105593,
-    "win_rate": 0.6076
+    "total_closed_trades": 138064,
+    "win_rate": 0.6569
   },
   "risk_management": {
     "weight": 0.08,
-    "margin_utilization": 0.3146,
-    "account_value_usd": 44384222.68,
-    "total_margin_used": 13962781.93,
-    "current_positions_count": 9,
-    "max_simultaneous_positions": 9,
+    "margin_utilization": 0.2523,
+    "account_value_usd": 44771044.81,
+    "total_margin_used": 11296701.12,
+    "current_positions_count": 8,
+    "max_simultaneous_positions": 8,
     "holds_through_funding": true,
-    "total_funding_events": 602
+    "total_funding_events": 610
   },
   "trade_sequencing": {
     "weight": 0.08,
@@ -272,15 +290,15 @@
       "median_minutes": 0.1
     },
     "buy_sell_ratio": {
-      "buy_pct": 0.4004,
-      "sell_pct": 0.5996
+      "buy_pct": 0.3062,
+      "sell_pct": 0.6938
     },
-    "total_fills": 105593
+    "total_fills": 138064
   },
   "account_characteristics": {
     "weight": 0.07,
-    "account_value_usd": 44384222.68,
-    "total_volume_usd": 70054370.44,
-    "weekly_volume_usd": 70054370.44
+    "account_value_usd": 44771044.81,
+    "total_volume_usd": 101438098.35,
+    "weekly_volume_usd": 89857054.21
   }
 }
