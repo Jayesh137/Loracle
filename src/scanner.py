@@ -246,6 +246,8 @@ def scan_leaderboard():
     """Main scanning loop: check leaderboard wallets against fingerprint."""
     config = load_config()
     target = config["target_wallet"].lower()
+    known_alts = {a.lower() for a in config.get("known_alts", [])}
+    skip_wallets = {target} | known_alts
     thresholds = config["alert_thresholds"]
     scanner_config = config["scanner"]
 
@@ -273,7 +275,7 @@ def scan_leaderboard():
 
     for entry in leaderboard[:max_wallets]:
         wallet = entry.get("ethAddress", entry.get("address", ""))
-        if not wallet or wallet.lower() == target:
+        if not wallet or wallet.lower() in skip_wallets:
             continue
 
         scanned += 1

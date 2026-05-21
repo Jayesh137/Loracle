@@ -69,9 +69,15 @@ def check_if_hl_deposit(address: str) -> bool:
     )
 
 
+def _cursor_name(wallet: str) -> str:
+    """Per-wallet L1 block cursor so primary and known_alts don't trample each other."""
+    return f"last_l1_block_{wallet.lower()[-8:]}"
+
+
 def trace_outbound_transfers(wallet: str) -> list[dict]:
     """Find USDC transfers OUT from the tracked wallet. Returns new transfers."""
-    last_block = read_cursor("last_l1_block")
+    cursor = _cursor_name(wallet)
+    last_block = read_cursor(cursor)
     transfers = get_usdc_transfers(wallet, start_block=last_block)
 
     if not transfers:
@@ -86,15 +92,23 @@ def trace_outbound_transfers(wallet: str) -> list[dict]:
 
     if transfers:
         max_block = max(int(t.get("blockNumber", 0)) for t in transfers)
-        write_cursor("last_l1_block", max_block)
+        write_cursor(cursor, max_block)
 
     return outbound
 
 
-def trace_fund_flow(wallet: str) -> None:
-    """Main tracing logic: detect outbound transfers and follow the money."""
+def trace_fund_flow(wallet: str, known_self: set[str] | None = None) -> None:
+    """Main tracing logic: detect outbound transfers and follow the money.
+
+    known_self: lowercased set of addresses that belong to the same trader
+    (primary + known_alts). Outflows to these are tagged as internal and do
+    not fire NEW WALLET alerts. Defaults to {wallet} when not provided.
+    """
     import os
     config = load_config()
+
+    if known_self is None:
+        known_self = {wallet.lower()}
 
     api_key = os.environ.get("ETHERSCAN_API_KEY", "")
     print(f"[tracer] Checking fund flows for {wallet}")
@@ -108,13 +122,20 @@ def trace_fund_flow(wallet: str) -> None:
 
     for transfer in outbound:
         destination = transfer["to"]
+        dest_lower = destination.lower()
         value_raw = int(transfer.get("value", 0))
         value_usdc = value_raw / 1e6  # USDC has 6 decimals
         tx_hash = transfer.get("hash", "unknown")
 
-        print(f"[tracer] OUTBOUND: {value_usdc:.2f} USDC -> {destination}")
+        is_internal = dest_lower in known_self
+        tag = " [INTERNAL — known alt]" if is_internal else ""
+        print(f"[tracer] OUTBOUND: {value_usdc:.2f} USDC -> {destination}{tag}")
 
-        alert_fund_movement(wallet, f"{value_usdc:,.2f}", destination, tx_hash)
+        alert_fund_movement(wallet, f"{value_usdc:,.2f}", destination, tx_hash, is_internal=is_internal)
+
+        if is_internal:
+            # Rotation between Loracle's own wallets — no new-wallet investigation needed.
+            continue
 
         print(f"[tracer] Checking if {destination} deposited to Hyperliquid...")
         if check_if_hl_deposit(destination):
@@ -135,16 +156,24 @@ def trace_fund_flow(wallet: str) -> None:
             next_transfers = get_usdc_transfers(destination)
             for nt in next_transfers[:5]:
                 next_dest = nt["to"]
-                if next_dest.lower() != destination.lower():
-                    if check_if_hl_deposit(next_dest):
-                        print(f"[tracer] !!! NEW WALLET FOUND (2-hop): {next_dest} !!!")
-                        alert_new_wallet_found(wallet, next_dest, "fund_trace_2hop", 0.9)
+                next_dest_lower = next_dest.lower()
+                if next_dest_lower == dest_lower or next_dest_lower in known_self:
+                    continue
+                if check_if_hl_deposit(next_dest):
+                    print(f"[tracer] !!! NEW WALLET FOUND (2-hop): {next_dest} !!!")
+                    alert_new_wallet_found(wallet, next_dest, "fund_trace_2hop", 0.9)
 
 
 def main():
     config = load_config()
-    trace_fund_flow(config["target_wallet"])
-    print("[tracer] Trace complete.")
+    target = config["target_wallet"]
+    known_alts = config.get("known_alts", [])
+    known_self = {target.lower()} | {a.lower() for a in known_alts}
+
+    wallets_to_trace = [target] + list(known_alts)
+    for w in wallets_to_trace:
+        trace_fund_flow(w, known_self=known_self)
+    print(f"[tracer] Trace complete across {len(wallets_to_trace)} wallet(s).")
 
 
 if __name__ == "__main__":

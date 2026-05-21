@@ -38,14 +38,19 @@ def send_alert(subject: str, body: str, html_body: str | None = None) -> bool:
         return False
 
 
-def alert_fund_movement(wallet: str, amount: str, destination: str, tx_hash: str) -> bool:
-    subject = "[LORACLE] CRITICAL: Fund Movement Detected"
+def alert_fund_movement(wallet: str, amount: str, destination: str, tx_hash: str, is_internal: bool = False) -> bool:
+    if is_internal:
+        subject = "[LORACLE] INFO: Internal Transfer (known alt)"
+        trailer = "\nDestination is a known Loracle wallet — not a new-wallet event."
+    else:
+        subject = "[LORACLE] CRITICAL: Fund Movement Detected"
+        trailer = "\nTracing destination wallet..."
     body = (
         f"Wallet: {wallet}\n"
         f"Event: Withdrawal of {amount} USDC\n"
         f"Destination: {destination}\n"
         f"TX Hash: {tx_hash}\n"
-        f"\nTracing destination wallet..."
+        f"{trailer}"
     )
     return send_alert(subject, body)
 

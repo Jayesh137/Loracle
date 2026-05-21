@@ -810,7 +810,11 @@ data/
 
 8. **Deposit source analysis:** When the wallet receives deposits, trace where the USDC came from. The funding source address pattern is an identity signal.
 
-9. **Second-wallet hypothesis tracking:** Public reporting (e.g. 247 Research) has flagged a second Loracle wallet used to long HYPE. Maintain a `known_alts.json` list of confirmed/likely alts and run the same collection against each.
+9. **Second-wallet hypothesis tracking:** Public reporting (e.g. 247 Research) flagged a second Loracle wallet used to long HYPE. The user has since confirmed `0x84b36f07a6547b1d6a2414240db69d9bbd0ee01f` as that alt — described as a long-only profile with a trading style distinct from the primary, so it is **not** merged into the primary fingerprint. It is recorded in `config.json -> known_alts[]` and used by:
+   - **`tracer.py`** — traced as a second L1 surveillance point (per-wallet cursor); outflows from the alt to a third address get the same NEW WALLET investigation as outflows from the primary. Transfers between primary ↔ alt are tagged internal and do not fire CRITICAL new-wallet alerts.
+   - **`scanner.py`** — skipped in the leaderboard candidate loop so the alt is never scored against its own owner's fingerprint.
+
+   If additional alts are confirmed later, add them to `known_alts[]` — no code changes required.
 
 ---
 
