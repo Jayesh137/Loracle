@@ -1,17 +1,19 @@
 {
   "version": "1.0",
-  "computed_at": "2026-06-24T02:48:22.074231+00:00",
+  "computed_at": "2026-06-25T02:48:11.977769+00:00",
   "data_range": {
     "first_fill": "2026-05-01T20:03:41.142000+00:00",
-    "last_fill": "2026-06-19T05:04:13.973000+00:00",
-    "total_fills": 474728,
-    "total_days_active": 48
+    "last_fill": "2026-06-24T23:06:07.515000+00:00",
+    "total_fills": 474731,
+    "total_days_active": 54
   },
   "asset_preferences": {
     "weight": 0.15,
     "coins_traded": [
       "#1010",
       "#1280",
+      "#1890",
+      "#5270",
       "@107",
       "@150",
       "@166",
@@ -71,7 +73,9 @@
       "XMR": 0.0,
       "@150": 0.0,
       "#1010": 0.0,
-      "#1280": 0.0
+      "#1280": 0.0,
+      "#5270": 0.0,
+      "#1890": 0.0
     },
     "top_5_by_volume": [
       "HYPE",
@@ -80,7 +84,7 @@
       "ZEC",
       "TON"
     ],
-    "total_unique_coins": 30
+    "total_unique_coins": 32
   },
   "leverage_profile": {
     "weight": 0.15,
@@ -276,6 +280,16 @@
         "typical_min_usd": 72.28,
         "typical_max_usd": 942.64,
         "mean_usd": 426.36
+      },
+      "#1890": {
+        "typical_min_usd": 11.89,
+        "typical_max_usd": 11.89,
+        "mean_usd": 11.89
+      },
+      "#5270": {
+        "typical_min_usd": 12.0,
+        "typical_max_usd": 12.0,
+        "mean_usd": 12.0
       }
     },
     "size_to_account_ratio": {
@@ -283,7 +297,7 @@
       "median": 0.0,
       "std": 0.001
     },
-    "account_value_usd": 9414618.69
+    "account_value_usd": 9408722.67
   },
   "timing_profile": {
     "weight": 0.15,
@@ -441,25 +455,25 @@
       "median": 16.89
     },
     "stop_loss_pnl": {
-      "mean": -304.89,
+      "mean": -304.88,
       "median": -47.59
     },
     "fee_stats": {
       "total": 92202.33,
       "mean": 0.1942
     },
-    "total_closed_trades": 474728,
+    "total_closed_trades": 474731,
     "win_rate": 0.3476
   },
   "risk_management": {
     "weight": 0.08,
-    "margin_utilization": 0.9755,
-    "account_value_usd": 9414618.69,
-    "total_margin_used": 9184389.41,
+    "margin_utilization": 0.9748,
+    "account_value_usd": 9408722.67,
+    "total_margin_used": 9172086.7,
     "current_positions_count": 8,
     "max_simultaneous_positions": 8,
     "holds_through_funding": true,
-    "total_funding_events": 1444
+    "total_funding_events": 1462
   },
   "trade_sequencing": {
     "weight": 0.08,
@@ -471,12 +485,12 @@
       "buy_pct": 0.5773,
       "sell_pct": 0.4227
     },
-    "total_fills": 474728
+    "total_fills": 474731
   },
   "account_characteristics": {
     "weight": 0.07,
-    "account_value_usd": 9414618.69,
-    "total_volume_usd": 462675254.74,
-    "weekly_volume_usd": 66949898.56
+    "account_value_usd": 9408722.67,
+    "total_volume_usd": 462675278.64,
+    "weekly_volume_usd": 59836038.44
   }
 }
