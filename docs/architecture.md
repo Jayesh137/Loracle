@@ -1,7 +1,25 @@
 # Loracle: System Architecture
 
 > Technical architecture for the Loracle trader intelligence and fingerprinting system.
-> Companion to [PRD.md](../../PRD.md).
+> Companion to [PRD.md](../PRD.md).
+
+---
+
+## Status: what is actually built (as of this revision)
+
+| Area | Status |
+|------|--------|
+| Data collection (collector, backfill) | **Built & running** |
+| Fingerprint (positions reconstructed from fills) | **Built** |
+| Scanner (symmetric-window behavioral matching) | **Built** |
+| Fund-flow tracer (`known_alts` aware) | Built, **scheduled runs disabled** (no L1 volume yet) — manual dispatch only |
+| Dashboard: Home / Fills / Fingerprint / Scanner | **Built (4 routes)** |
+| Daily reports (`reports/`, `/reports` route) | **Not built** (descoped — use the dashboard directly) |
+| Twitter monitor + correlator (`twitter/`, `/twitter` route) | **Dormant** — code exists but all nitter RSS bridges are down; disabled in CI |
+| Dashboard components dir, `stores.js`, `utils.js` | **Not used** — pages are self-contained; helpers live in `lib/api.js` |
+
+Sections below describe the intended design; treat anything contradicting the
+table above as aspirational.
 
 ---
 
@@ -228,28 +246,32 @@ def load_all_records(directory: str) -> list:
    a. Query clearinghouseState (positions, leverage, account size)
    b. Query recent userFillsByTime (last 7 days)
    c. Compute fingerprint similarity score
+   NOTE: the target's comparison fingerprint is rebuilt over the SAME lookback
+   window as candidates (symmetric); weights come from config.scanner.weights.
 4. Rank by similarity, save to data/scans/YYYY-MM-DD.json
-5. If any score >= 0.85 → HIGH alert
-6. If any score >= 0.70 → include in daily report
+5. If any score >= alert_thresholds.similarity_high (0.70) → HIGH email alert
+6. If any score >= similarity_medium (0.50) → logged in scan results
 ```
 
 **fingerprint.py** (daily):
 ```
-1. Load ALL data from data/fills/, data/positions/, data/orders/, etc.
-2. Compute each fingerprint dimension (see PRD Section 7)
+1. Load ALL fills, reconstruct positions via positions_from_fills()
+   (signed running size per coin; opens at zero-exit, closes at zero-return)
+2. Compute each fingerprint dimension (see PRD Section 7); hold-duration,
+   position-sizing and win-rate are position-based, not fill-based
 3. Write profile/fingerprint.json
-4. Generate reports/daily/YYYY-MM-DD.md
-5. Send daily summary email
 ```
+Note: daily reports and daily summary emails are **not** implemented (descoped).
 
 ### 3.4 Python Dependencies
 
 ```
 requests>=2.31.0
 numpy>=1.26.0
-scipy>=1.12.0
+pypdf>=4.0.0
 python-docx>=1.1.0
-PyPDF2>=3.0.0
+pdfminer.six>=20231228
+feedparser>=6.0.0
 ```
 
 ---
@@ -620,8 +642,8 @@ Time ─────────────────────────
 Every 5 min:    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
                 collect.yml (positions, fills, orders, account)
 
-Every 15 min:   ░   ░   ░   ░   ░   ░   ░   ░   ░   ░   ░
-                trace.yml (L1 fund flows, funding, ledger)
+Disabled:       (manual dispatch only)
+                trace.yml (L1 fund flows) — no L1 volume yet, re-enable when expected
 
 Every 1 hour:   ░           ░           ░           ░
                 scan.yml (leaderboard behavioral matching)

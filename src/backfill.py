@@ -152,9 +152,11 @@ def backfill_orders(wallet: str) -> int:
     """Capture historical orders (limited to last 2000)."""
     print("[backfill] Capturing historical orders (last 2000)...")
     historical = hl_post({"type": "historicalOrders", "user": wallet})
+    if not isinstance(historical, list):
+        historical = []  # hl_post returns {} on failure for non-user endpoints
     added = append_records(
         str(DATA_DIR / "orders"),
-        [{"oid": o["order"]["oid"], **o} for o in historical],
+        [{"oid": o["order"]["oid"], **o} for o in historical if "order" in o],
         key_field="oid",
     )
     return added

@@ -1,7 +1,6 @@
 # src/scanner.py
 """Scans Hyperliquid leaderboard for wallets matching the Loracle fingerprint."""
 
-import json
 import sys
 import time
 from datetime import datetime, timezone
@@ -15,7 +14,7 @@ import requests
 from src.utils import (
     load_config, hl_post, append_records, save_latest, DATA_DIR
 )
-from src.fingerprint import build_fingerprint, compute_asset_preferences, compute_timing_profile
+from src.fingerprint import compute_asset_preferences, compute_timing_profile
 from src.alerts import alert_behavioral_match
 
 
@@ -129,42 +128,58 @@ def compare_leverage(fp_a: dict, fp_b: dict) -> float:
     return 1.0 - abs(mean_a - mean_b) / max_val
 
 
+DEFAULT_WEIGHTS = {
+    "asset_preferences": 0.25,
+    "timing_profile": 0.25,
+    "leverage_profile": 0.20,
+    "entry_exit_style": 0.15,
+    "hold_duration": 0.15,
+}
+
+
+def _get_weights() -> dict:
+    """Single source of truth for dimension weights (config, else defaults)."""
+    return load_config().get("scanner", {}).get("weights") or DEFAULT_WEIGHTS
+
+
 def compute_similarity(loracle_fp: dict, candidate_fp: dict) -> tuple[float, dict]:
-    """Compute weighted similarity between Loracle and a candidate fingerprint."""
+    """Weighted similarity. Low-signal dimensions (missing data on either side)
+    are dropped and the remaining weights renormalized, so absent data neither
+    scores 0 nor dilutes the result."""
     dimensions = {}
+    valid = set()
 
-    # Asset preferences
-    dim_score = compare_asset_preferences(
+    dimensions["asset_preferences"] = round(compare_asset_preferences(
         loracle_fp.get("asset_preferences", {}),
-        candidate_fp.get("asset_preferences", {})
-    )
-    dimensions["asset_preferences"] = round(dim_score, 4)
+        candidate_fp.get("asset_preferences", {})), 4)
+    if loracle_fp.get("asset_preferences", {}).get("coins_traded") and \
+       candidate_fp.get("asset_preferences", {}).get("coins_traded"):
+        valid.add("asset_preferences")
 
-    # Timing profile
-    dim_score = compare_timing_profiles(
+    dimensions["timing_profile"] = round(compare_timing_profiles(
         loracle_fp.get("timing_profile", {}),
-        candidate_fp.get("timing_profile", {})
-    )
-    dimensions["timing_profile"] = round(dim_score, 4)
+        candidate_fp.get("timing_profile", {})), 4)
+    if any(loracle_fp.get("timing_profile", {}).get("hourly_distribution", [])) and \
+       any(candidate_fp.get("timing_profile", {}).get("hourly_distribution", [])):
+        valid.add("timing_profile")
 
-    # Leverage
-    dim_score = compare_leverage(
+    dimensions["leverage_profile"] = round(compare_leverage(
         loracle_fp.get("leverage_profile", {}),
-        candidate_fp.get("leverage_profile", {})
-    )
-    dimensions["leverage_profile"] = round(dim_score, 4)
+        candidate_fp.get("leverage_profile", {})), 4)
+    if loracle_fp.get("leverage_profile", {}).get("overall") and \
+       candidate_fp.get("leverage_profile", {}).get("overall"):
+        valid.add("leverage_profile")
 
-    # Entry/exit style (market/limit ratio similarity)
     style_a = loracle_fp.get("entry_exit_style", {}).get("order_type_ratio", {})
     style_b = candidate_fp.get("entry_exit_style", {}).get("order_type_ratio", {})
     if style_a and style_b:
         vec_a = [style_a.get("market", 0), style_a.get("limit", 0)]
         vec_b = [style_b.get("market", 0), style_b.get("limit", 0)]
         dimensions["entry_exit_style"] = round(cosine_similarity(vec_a, vec_b), 4)
+        valid.add("entry_exit_style")
     else:
         dimensions["entry_exit_style"] = 0.0
 
-    # Hold duration buckets
     buckets_a = loracle_fp.get("hold_duration", {}).get("distribution_buckets", {})
     buckets_b = candidate_fp.get("hold_duration", {}).get("distribution_buckets", {})
     if buckets_a and buckets_b:
@@ -172,19 +187,15 @@ def compute_similarity(loracle_fp: dict, candidate_fp: dict) -> tuple[float, dic
         vec_a = [buckets_a.get(k, 0) for k in keys]
         vec_b = [buckets_b.get(k, 0) for k in keys]
         dimensions["hold_duration"] = round(cosine_similarity(vec_a, vec_b), 4)
+        valid.add("hold_duration")
     else:
         dimensions["hold_duration"] = 0.0
 
-    # Weighted average (sum to 1.0)
-    weights = {
-        "asset_preferences": 0.25,
-        "timing_profile": 0.25,
-        "leverage_profile": 0.20,
-        "entry_exit_style": 0.15,
-        "hold_duration": 0.15,
-    }
-
-    weighted_sum = sum(dimensions.get(k, 0) * w for k, w in weights.items())
+    weights = _get_weights()
+    total_w = sum(weights.get(k, 0) for k in valid)
+    if total_w <= 0:
+        return 0.0, dimensions
+    weighted_sum = sum(dimensions[k] * weights.get(k, 0) for k in valid) / total_w
 
     return round(weighted_sum, 4), dimensions
 
@@ -192,7 +203,8 @@ def compute_similarity(loracle_fp: dict, candidate_fp: dict) -> tuple[float, dic
 def build_candidate_fingerprint(fills: list[dict], state: dict) -> dict:
     """Build a mini-fingerprint for a candidate wallet from their data."""
     from src.fingerprint import (
-        compute_leverage_profile, compute_hold_duration, compute_entry_exit_style
+        compute_leverage_profile, compute_hold_duration, compute_entry_exit_style,
+        positions_from_fills,
     )
 
     positions = state
@@ -200,12 +212,13 @@ def build_candidate_fingerprint(fills: list[dict], state: dict) -> dict:
         if "perp" in positions:
             positions = positions["perp"]
 
+    recon = positions_from_fills(fills)
     return {
         "asset_preferences": compute_asset_preferences(fills),
         "timing_profile": compute_timing_profile(fills),
         "leverage_profile": compute_leverage_profile(fills, positions),
-        "entry_exit_style": compute_entry_exit_style(fills),
-        "hold_duration": compute_hold_duration(fills),
+        "entry_exit_style": compute_entry_exit_style(fills, recon),
+        "hold_duration": compute_hold_duration(recon),
     }
 
 
@@ -251,23 +264,22 @@ def scan_leaderboard():
     thresholds = config["alert_thresholds"]
     scanner_config = config["scanner"]
 
-    # Load or build Loracle fingerprint
-    fp_path = Path(DATA_DIR.parent / "profile" / "fingerprint.json")
-    if fp_path.exists():
-        with open(fp_path) as f:
-            loracle_fp = json.load(f)
-        print("[scanner] Loaded existing fingerprint")
-    else:
-        print("[scanner] No fingerprint found, building...")
-        loracle_fp = build_fingerprint()
+    max_wallets = scanner_config["max_leaderboard_wallets"]
+    min_fills = scanner_config["min_fills_for_comparison"]
+    lookback_days = scanner_config["fills_lookback_days"]
+
+    # Build the target's comparison fingerprint over the SAME lookback window as
+    # candidates, so we compare like with like (candidate fills are only 7 days;
+    # comparing them against a full-history fingerprint is apples-to-oranges).
+    target_fills = get_candidate_fills(config["target_wallet"], lookback_days)
+    target_state = get_candidate_state(config["target_wallet"])
+    loracle_fp = build_candidate_fingerprint(target_fills, target_state)
+    print(f"[scanner] Built windowed target fingerprint from {len(target_fills)} fills "
+          f"({lookback_days}d)")
 
     # Fetch leaderboard
     leaderboard = fetch_leaderboard()
     print(f"[scanner] Leaderboard: {len(leaderboard)} entries")
-
-    max_wallets = scanner_config["max_leaderboard_wallets"]
-    min_fills = scanner_config["min_fills_for_comparison"]
-    lookback_days = scanner_config["fills_lookback_days"]
 
     results = []
     top_scores = []  # Track all scores for diagnostics

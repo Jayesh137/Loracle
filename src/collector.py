@@ -9,8 +9,12 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from src.utils import (
     load_config, hl_post, read_cursor, write_cursor,
     append_records, save_snapshot, save_latest, update_index,
-    now_ms, DATA_DIR
+    data_age_hours, now_ms, DATA_DIR
 )
+
+# This target trades many times per hour; no fresh fills for this long means the
+# pipeline (or upstream API/wallet) is broken, not that the trader is merely quiet.
+STALE_THRESHOLD_HOURS = 24
 
 
 def collect_positions(wallet: str) -> None:
@@ -68,9 +72,11 @@ def collect_orders(wallet: str) -> None:
     })
 
     historical = hl_post({"type": "historicalOrders", "user": wallet})
+    if not isinstance(historical, list):
+        historical = []  # hl_post returns {} on failure for non-user endpoints
     append_records(
         str(DATA_DIR / "orders"),
-        [{"oid": o["order"]["oid"], **o} for o in historical],
+        [{"oid": o["order"]["oid"], **o} for o in historical if "order" in o],
         key_field="oid",
     )
 
@@ -195,6 +201,12 @@ def main():
 
     print("[collector] Updating index...")
     update_index()
+
+    age = data_age_hours()
+    if age is not None and age > STALE_THRESHOLD_HOURS:
+        # ::error:: is rendered as a red annotation in the GitHub Actions UI.
+        print(f"::error::[collector] STALE DATA: newest fill is {age:.1f}h old "
+              f"(threshold {STALE_THRESHOLD_HOURS}h). Collection may be broken.")
 
     print("[collector] Collection complete.")
 

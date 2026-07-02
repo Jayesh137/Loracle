@@ -13,9 +13,14 @@ PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 CONFIG_PATH = PROJECT_ROOT / "config.json"
 
+_CONFIG_CACHE = None
+
 def load_config():
-    with open(CONFIG_PATH) as f:
-        return json.load(f)
+    global _CONFIG_CACHE
+    if _CONFIG_CACHE is None:
+        with open(CONFIG_PATH) as f:
+            _CONFIG_CACHE = json.load(f)
+    return _CONFIG_CACHE
 
 # --- Hyperliquid API ---
 
@@ -231,6 +236,43 @@ def update_index() -> None:
                         snapshots_by_date[d] = files
                 index["account_snapshots"] = snapshots_by_date
 
+    # Freshness: newest fill timestamp lets the dashboard/CI detect a stalled pipeline.
+    newest_fill_ms = 0
+    fills_dir = DATA_DIR / "fills"
+    if fills_dir.exists():
+        for fp in fills_dir.glob("*.json"):
+            if fp.name == "latest.json":
+                continue
+            try:
+                with open(fp) as f:
+                    for r in json.load(f):
+                        newest_fill_ms = max(newest_fill_ms, int(r.get("time", 0)))
+            except (json.JSONDecodeError, ValueError, OSError):
+                continue
+    index["freshness"] = {
+        "generated_at": index["last_updated"],
+        "newest_fill_ms": newest_fill_ms,
+        "newest_fill_iso": (
+            datetime.fromtimestamp(newest_fill_ms / 1000, tz=timezone.utc).isoformat()
+            if newest_fill_ms else None
+        ),
+    }
+
     index_path = DATA_DIR / "index.json"
     with open(index_path, "w") as f:
         json.dump(index, f, indent=2)
+
+
+def data_age_hours() -> float | None:
+    """Hours since the most recent fill, or None if unknown. For staleness checks."""
+    index_path = DATA_DIR / "index.json"
+    if not index_path.exists():
+        return None
+    try:
+        with open(index_path) as f:
+            newest = json.load(f).get("freshness", {}).get("newest_fill_ms", 0)
+    except (json.JSONDecodeError, OSError):
+        return None
+    if not newest:
+        return None
+    return (now_ms() - int(newest)) / 3_600_000

@@ -309,6 +309,15 @@
 		}
 	}
 
+	// Staleness: index.last_updated only advances when a workflow actually runs,
+	// so a large gap means the pipeline has stalled even if the page looks normal.
+	const STALE_HOURS = 6;
+	function staleHours(idx) {
+		const ts = idx?.freshness?.newest_fill_iso || idx?.last_updated;
+		if (!ts) return null;
+		return (Date.now() - new Date(ts).getTime()) / 3_600_000;
+	}
+
 	function getPositions(...datasets) {
 		const all = [];
 		for (const data of datasets) {
@@ -360,6 +369,14 @@
 		Tracking <span class="mono text-blue">{shortAddr('0x8def9f50456c6c4e37fa5d3d57f108ed23992dae')}</span>
 	</p>
 </div>
+
+{#if !loading && staleHours(index) !== null && staleHours(index) > STALE_HOURS}
+	{@const h = staleHours(index)}
+	<div class="stale-banner">
+		⚠ Data is stale — newest activity is {h >= 48 ? (h / 24).toFixed(1) + ' days' : h.toFixed(1) + ' hours'} old.
+		The collection pipeline may have stopped (check GitHub Actions — scheduled workflows are auto-disabled after repo inactivity).
+	</div>
+{/if}
 
 {#if loading}
 	<div class="loading">Loading data from GitHub...</div>
@@ -637,6 +654,15 @@
 {/if}
 
 <style>
+	.stale-banner {
+		background: rgba(255, 51, 85, 0.12);
+		border: 1px solid var(--accent-red);
+		color: var(--accent-red);
+		border-radius: 8px;
+		padding: 12px 16px;
+		margin-bottom: 20px;
+		font-size: 0.85rem;
+	}
 	.page-header {
 		margin-bottom: 28px;
 	}

@@ -18,6 +18,13 @@
   "scanner": {
     "max_leaderboard_wallets": 500,
     "fills_lookback_days": 7,
-    "min_fills_for_comparison": 20
+    "min_fills_for_comparison": 20,
+    "weights": {
+      "asset_preferences": 0.25,
+      "timing_profile": 0.25,
+      "leverage_profile": 0.20,
+      "entry_exit_style": 0.15,
+      "hold_duration": 0.15
+    }
   }
 }

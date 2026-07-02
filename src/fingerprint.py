@@ -40,6 +40,75 @@ def load_account_latest() -> dict:
     return {}
 
 
+def positions_from_fills(fills: list[dict]) -> list[dict]:
+    """Reconstruct positions from fills via signed running size per coin.
+
+    A position opens when signed size leaves zero and closes when it returns to
+    zero (or flips sign). Handles scale-in/scale-out (many partial fills per
+    position). Sizing uses peak notional over the position's life.
+
+    Returns dicts: {coin, open_time, close_time, is_open, direction,
+    peak_notional, realized_pnl, num_fills, duration_minutes}.
+    Leading positions whose open predates the data window may be mis-signed
+    (only closing fills are seen); this is an unavoidable edge artifact.
+    """
+    by_coin = defaultdict(list)
+    for f in fills:
+        by_coin[f.get("coin", "UNKNOWN")].append(f)
+
+    positions = []
+    for coin, cfills in by_coin.items():
+        cfills = sorted(cfills, key=lambda f: f.get("time", 0))
+        max_sz = max((abs(float(f.get("sz", 0) or 0)) for f in cfills), default=0.0)
+        eps = max(max_sz * 1e-6, 1e-12)  # tolerate float drift from summing many fills
+
+        running = 0.0
+        cur = None
+
+        def _open(size, px, t, pnl=0.0):
+            return {
+                "coin": coin, "open_time": t, "close_time": None, "is_open": True,
+                "direction": "long" if size > 0 else "short",
+                "peak_notional": abs(size) * px, "realized_pnl": pnl, "num_fills": 1,
+            }
+
+        def _close(pos, t):
+            pos["close_time"] = t
+            pos["is_open"] = False
+            pos["duration_minutes"] = max(0.0, (t - pos["open_time"]) / 60000)
+            positions.append(pos)
+
+        for f in cfills:
+            sz = abs(float(f.get("sz", 0) or 0))
+            signed = sz if f.get("side", "") == "B" else -sz
+            px = float(f.get("px", 0) or 0)
+            t = int(f.get("time", 0) or 0)
+            pnl = float(f.get("closedPnl", 0) or 0)
+
+            prev = running
+            running += signed
+
+            if cur is None:
+                if abs(running) > eps:
+                    cur = _open(running, px, t, pnl)
+            else:
+                cur["num_fills"] += 1
+                cur["realized_pnl"] += pnl
+                cur["peak_notional"] = max(cur["peak_notional"], abs(running) * px)
+                if abs(running) <= eps:
+                    _close(cur, t)
+                    cur = None
+                elif abs(prev) > eps and (prev > 0) != (running > 0):
+                    # crossed through zero into the opposite side: close then reopen
+                    _close(cur, t)
+                    cur = _open(running, px, t)
+
+        if cur is not None:
+            positions.append(cur)  # still open: left as is_open=True, no close_time
+
+    return positions
+
+
 def compute_asset_preferences(fills: list[dict]) -> dict:
     """Which coins traded and how often."""
     if not fills:
@@ -106,20 +175,16 @@ def compute_leverage_profile(fills: list[dict], positions: dict) -> dict:
     }
 
 
-def compute_position_sizing(fills: list[dict], positions: dict) -> dict:
-    """Position sizes relative to account value."""
-    if not fills:
+def compute_position_sizing(positions: list[dict], account_value: float = 0.0) -> dict:
+    """Position sizes (peak notional per reconstructed position) vs account value."""
+    if not positions:
         return {"weight": 0.12, "notional_ranges": {}, "size_to_account_ratio": {}}
 
-    # Compute notional per coin
     coin_notionals = defaultdict(list)
-    for f in fills:
-        coin = f.get("coin", "UNKNOWN")
-        sz = float(f.get("sz", 0))
-        px = float(f.get("px", 0))
-        notional = sz * px
-        if notional > 0:
-            coin_notionals[coin].append(notional)
+    for p in positions:
+        n = p.get("peak_notional", 0)
+        if n > 0:
+            coin_notionals[p["coin"]].append(n)
 
     notional_ranges = {}
     for coin, notionals in coin_notionals.items():
@@ -129,11 +194,6 @@ def compute_position_sizing(fills: list[dict], positions: dict) -> dict:
             "typical_max_usd": round(float(np.percentile(arr, 90)), 2),
             "mean_usd": round(float(np.mean(arr)), 2),
         }
-
-    # Account value from positions
-    account_value = 0
-    if positions:
-        account_value = float(positions.get("marginSummary", {}).get("accountValue", 0))
 
     size_ratio = {}
     if account_value > 0:
@@ -151,6 +211,7 @@ def compute_position_sizing(fills: list[dict], positions: dict) -> dict:
         "notional_ranges": notional_ranges,
         "size_to_account_ratio": size_ratio,
         "account_value_usd": round(account_value, 2),
+        "total_positions": len(positions),
     }
 
 
@@ -198,33 +259,19 @@ def compute_timing_profile(fills: list[dict]) -> dict:
     }
 
 
-def compute_hold_duration(fills: list[dict]) -> dict:
-    """How long positions are held."""
-    if not fills:
+def compute_hold_duration(positions: list[dict]) -> dict:
+    """How long positions are held (from reconstructed, closed positions)."""
+    closed = [p for p in positions if not p.get("is_open", False)]
+    if not closed:
         return {"weight": 0.10, "overall_minutes": {}, "distribution_buckets": {}}
-
-    # Match opens and closes per coin
-    coin_trades = defaultdict(list)
-    for f in fills:
-        coin_trades[f.get("coin", "UNKNOWN")].append(f)
 
     durations_minutes = []
     per_coin_durations = defaultdict(list)
-
-    for coin, trades in coin_trades.items():
-        sorted_trades = sorted(trades, key=lambda t: t.get("time", 0))
-        open_time = None
-        for t in sorted_trades:
-            dir_field = t.get("dir", "")
-            if "Open" in str(dir_field):
-                open_time = t.get("time", 0)
-            elif "Close" in str(dir_field) and open_time:
-                close_time = t.get("time", 0)
-                dur = (close_time - open_time) / 60000  # ms to minutes
-                if dur > 0:
-                    durations_minutes.append(dur)
-                    per_coin_durations[coin].append(dur)
-                open_time = None
+    for p in closed:
+        dur = p.get("duration_minutes", 0)
+        if dur > 0:
+            durations_minutes.append(dur)
+            per_coin_durations[p["coin"]].append(dur)
 
     overall = {}
     if durations_minutes:
@@ -269,43 +316,37 @@ def compute_hold_duration(fills: list[dict]) -> dict:
     }
 
 
-def compute_entry_exit_style(fills: list[dict]) -> dict:
-    """Market vs limit, order types, etc."""
+def compute_entry_exit_style(fills: list[dict], positions: list[dict] | None = None) -> dict:
+    """Order-type ratio & fees (fill-level); win rate & PnL (position-level)."""
     if not fills:
         return {"weight": 0.10, "order_type_ratio": {}}
 
-    # Count crossed (market) vs not crossed (limit)
+    # Fill-level: market (crossed) vs limit is genuinely a per-fill property.
     crossed_count = sum(1 for f in fills if f.get("crossed", False))
     total = len(fills)
     market_ratio = round(crossed_count / total, 4) if total else 0
     limit_ratio = round(1 - market_ratio, 4)
 
-    # Closed PnL analysis for take profit / stop loss
-    closed_pnls = []
-    for f in fills:
-        pnl = f.get("closedPnl")
-        if pnl and pnl != "0":
-            closed_pnls.append(float(pnl))
-
-    tp_pnls = [p for p in closed_pnls if p > 0]
-    sl_pnls = [p for p in closed_pnls if p < 0]
-
-    tp_stats = {}
-    if tp_pnls:
-        arr = np.array(tp_pnls)
-        tp_stats = {"mean": round(float(np.mean(arr)), 2), "median": round(float(np.median(arr)), 2)}
-
-    sl_stats = {}
-    if sl_pnls:
-        arr = np.array(sl_pnls)
-        sl_stats = {"mean": round(float(np.mean(arr)), 2), "median": round(float(np.median(arr)), 2)}
-
-    # Fee analysis
+    # Fee analysis (fill-level)
     fees = [float(f.get("fee", 0)) for f in fills if f.get("fee")]
     fee_stats = {}
     if fees:
         arr = np.array(fees)
         fee_stats = {"total": round(float(np.sum(arr)), 2), "mean": round(float(np.mean(arr)), 4)}
+
+    # Position-level: win rate and realized PnL per round-trip, not per fill.
+    closed = [p for p in (positions or []) if not p.get("is_open", False)]
+    pnls = [p.get("realized_pnl", 0.0) for p in closed]
+    wins = [p for p in pnls if p > 0]
+    losses = [p for p in pnls if p < 0]
+
+    tp_stats, sl_stats = {}, {}
+    if wins:
+        arr = np.array(wins)
+        tp_stats = {"mean": round(float(np.mean(arr)), 2), "median": round(float(np.median(arr)), 2)}
+    if losses:
+        arr = np.array(losses)
+        sl_stats = {"mean": round(float(np.mean(arr)), 2), "median": round(float(np.median(arr)), 2)}
 
     return {
         "weight": 0.10,
@@ -313,8 +354,8 @@ def compute_entry_exit_style(fills: list[dict]) -> dict:
         "take_profit_pnl": tp_stats,
         "stop_loss_pnl": sl_stats,
         "fee_stats": fee_stats,
-        "total_closed_trades": len(closed_pnls),
-        "win_rate": round(len(tp_pnls) / len(closed_pnls), 4) if closed_pnls else 0,
+        "total_closed_trades": len(closed),
+        "win_rate": round(len(wins) / len(pnls), 4) if pnls else 0,
     }
 
 
@@ -432,7 +473,13 @@ def build_fingerprint() -> dict:
         if "perp" in positions:
             positions = positions["perp"]
 
-    print(f"[fingerprint] Data: {len(fills)} fills, {len(funding)} funding events")
+    recon_positions = positions_from_fills(fills)
+    account_value = 0.0
+    if positions:
+        account_value = float(positions.get("marginSummary", {}).get("accountValue", 0))
+
+    print(f"[fingerprint] Data: {len(fills)} fills, {len(recon_positions)} reconstructed "
+          f"positions, {len(funding)} funding events")
 
     data_range = {}
     if fills:
@@ -452,10 +499,10 @@ def build_fingerprint() -> dict:
         "data_range": data_range,
         "asset_preferences": compute_asset_preferences(fills),
         "leverage_profile": compute_leverage_profile(fills, positions),
-        "position_sizing": compute_position_sizing(fills, positions),
+        "position_sizing": compute_position_sizing(recon_positions, account_value),
         "timing_profile": compute_timing_profile(fills),
-        "hold_duration": compute_hold_duration(fills),
-        "entry_exit_style": compute_entry_exit_style(fills),
+        "hold_duration": compute_hold_duration(recon_positions),
+        "entry_exit_style": compute_entry_exit_style(fills, recon_positions),
         "risk_management": compute_risk_management(fills, positions, funding),
         "trade_sequencing": compute_trade_sequencing(fills),
         "account_characteristics": compute_account_characteristics(positions, fills),
