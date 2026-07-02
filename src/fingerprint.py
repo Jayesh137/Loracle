@@ -11,9 +11,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import numpy as np
 
-from src.utils import (
-    load_config, load_all_records, save_latest, DATA_DIR
-)
+from src.utils import DATA_DIR, load_all_records, load_config, save_latest
 
 
 def load_fills() -> list[dict]:
@@ -466,7 +464,6 @@ def build_fingerprint() -> dict:
     fills = load_fills()
     funding = load_funding()
     positions = load_positions_latest()
-    account = load_account_latest()
 
     # Use perp positions if available
     if isinstance(positions, dict) and "assetPositions" not in positions:

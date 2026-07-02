@@ -1,5 +1,5 @@
 """Targeted tests for scanner weighting and low-signal handling."""
-from src.scanner import compute_similarity, _get_weights
+from src.scanner import _get_weights, compute_similarity
 
 
 def test_identical_fingerprints_score_high():

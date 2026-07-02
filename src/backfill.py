@@ -8,10 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.utils import (
-    load_config, hl_post, append_records, write_cursor,
-    save_latest, update_index, DATA_DIR
-)
+from src.utils import DATA_DIR, append_records, hl_post, load_config, save_latest, update_index, write_cursor
 
 
 def backfill_fills(wallet: str) -> int:

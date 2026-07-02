@@ -9,7 +9,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.utils import save_latest, DATA_DIR
+from src.utils import DATA_DIR, save_latest
 
 
 def parse_docx(filepath: str) -> str:

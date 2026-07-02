@@ -11,11 +11,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import numpy as np
 import requests
 
-from src.utils import (
-    load_config, hl_post, append_records, save_latest, DATA_DIR
-)
-from src.fingerprint import compute_asset_preferences, compute_timing_profile
 from src.alerts import alert_behavioral_match
+from src.fingerprint import compute_asset_preferences, compute_timing_profile
+from src.utils import DATA_DIR, append_records, hl_post, load_config, save_latest
 
 
 def fetch_leaderboard() -> list[dict]:
@@ -203,7 +201,9 @@ def compute_similarity(loracle_fp: dict, candidate_fp: dict) -> tuple[float, dic
 def build_candidate_fingerprint(fills: list[dict], state: dict) -> dict:
     """Build a mini-fingerprint for a candidate wallet from their data."""
     from src.fingerprint import (
-        compute_leverage_profile, compute_hold_duration, compute_entry_exit_style,
+        compute_entry_exit_style,
+        compute_hold_duration,
+        compute_leverage_profile,
         positions_from_fills,
     )
 

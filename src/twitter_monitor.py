@@ -1,7 +1,6 @@
 # src/twitter_monitor.py
 """Fetches tweets via RSS bridges and extracts trading signals."""
 
-import json
 import re
 import sys
 from datetime import datetime, timezone
@@ -11,7 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import feedparser
 
-from src.utils import load_config, append_records, save_latest, DATA_DIR
+from src.utils import DATA_DIR, append_records, load_config, save_latest
 
 # Known crypto tickers for signal extraction
 CRYPTO_TICKERS = {

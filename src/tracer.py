@@ -6,11 +6,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.utils import (
-    load_config, etherscan_get, read_cursor, write_cursor,
-    append_records, save_latest, DATA_DIR
-)
 from src.alerts import alert_fund_movement, alert_new_wallet_found
+from src.utils import (
+    DATA_DIR,
+    append_records,
+    etherscan_get,
+    load_config,
+    read_cursor,
+    save_latest,
+    write_cursor,
+)
 
 
 def get_usdc_transfers(address: str, start_block: int = 0) -> list[dict]:
@@ -105,7 +110,6 @@ def trace_fund_flow(wallet: str, known_self: set[str] | None = None) -> None:
     not fire NEW WALLET alerts. Defaults to {wallet} when not provided.
     """
     import os
-    config = load_config()
 
     if known_self is None:
         known_self = {wallet.lower()}
@@ -152,7 +156,7 @@ def trace_fund_flow(wallet: str, known_self: set[str] | None = None) -> None:
             }
             save_latest(str(DATA_DIR / "scans"), {"fund_trace_findings": [finding]})
         else:
-            print(f"[tracer] Destination hasn't deposited to HL. Checking next hop...")
+            print("[tracer] Destination hasn't deposited to HL. Checking next hop...")
             next_transfers = get_usdc_transfers(destination)
             for nt in next_transfers[:5]:
                 next_dest = nt["to"]

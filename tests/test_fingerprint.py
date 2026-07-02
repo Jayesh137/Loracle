@@ -1,7 +1,9 @@
 """Targeted tests for position reconstruction and position-based metrics."""
 from src.fingerprint import (
-    positions_from_fills, compute_hold_duration, compute_position_sizing,
     compute_entry_exit_style,
+    compute_hold_duration,
+    compute_position_sizing,
+    positions_from_fills,
 )
 
 MIN = 60_000  # ms per minute

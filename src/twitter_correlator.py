@@ -1,17 +1,14 @@
 # src/twitter_correlator.py
 """Correlates monitored tweets against wallet trades to measure timing alignment."""
 
-import json
 import sys
-from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import numpy as np
 
-from src.utils import load_config, load_all_records, save_latest, DATA_DIR
+from src.utils import DATA_DIR, append_records, load_all_records, save_latest
 
 
 def load_tweets() -> list[dict]:
