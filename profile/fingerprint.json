@@ -1,11 +1,11 @@
 {
   "version": "1.0",
-  "computed_at": "2026-07-19T02:11:54.239348+00:00",
+  "computed_at": "2026-07-20T02:32:11.177803+00:00",
   "data_range": {
     "first_fill": "2026-05-01T20:03:41.142000+00:00",
-    "last_fill": "2026-07-18T18:47:11.667000+00:00",
-    "total_fills": 518735,
-    "total_days_active": 77
+    "last_fill": "2026-07-20T00:00:00.034000+00:00",
+    "total_fills": 518736,
+    "total_days_active": 79
   },
   "asset_preferences": {
     "weight": 0.15,
@@ -19,6 +19,7 @@
       "@107",
       "@150",
       "@166",
+      "@591",
       "AAVE",
       "ASTER",
       "AZTEC",
@@ -83,7 +84,8 @@
       "#1890": 0.0,
       "#5270": 0.0,
       "#6750": 0.0,
-      "#7390": 0.0
+      "#7390": 0.0,
+      "@591": 0.0
     },
     "top_5_by_volume": [
       "HYPE",
@@ -92,7 +94,7 @@
       "ZEC",
       "TON"
     ],
-    "total_unique_coins": 36
+    "total_unique_coins": 37
   },
   "leverage_profile": {
     "weight": 0.15,
@@ -322,15 +324,20 @@
         "typical_min_usd": 5078926.42,
         "typical_max_usd": 5078926.42,
         "mean_usd": 5078926.42
+      },
+      "@591": {
+        "typical_min_usd": 0.0,
+        "typical_max_usd": 0.0,
+        "mean_usd": 0.0
       }
     },
     "size_to_account_ratio": {
-      "mean": 0.5818,
-      "median": 0.0601,
-      "std": 1.2352
+      "mean": 0.5692,
+      "median": 0.0551,
+      "std": 1.2227
     },
-    "account_value_usd": 11959577.52,
-    "total_positions": 52
+    "account_value_usd": 11992034.24,
+    "total_positions": 53
   },
   "timing_profile": {
     "weight": 0.15,
@@ -504,13 +511,13 @@
   },
   "risk_management": {
     "weight": 0.08,
-    "margin_utilization": 0.9399,
-    "account_value_usd": 11959577.52,
-    "total_margin_used": 11240638.28,
+    "margin_utilization": 0.9377,
+    "account_value_usd": 11992034.24,
+    "total_margin_used": 11244433.48,
     "current_positions_count": 9,
     "max_simultaneous_positions": 9,
     "holds_through_funding": true,
-    "total_funding_events": 1930
+    "total_funding_events": 1952
   },
   "trade_sequencing": {
     "weight": 0.08,
@@ -522,12 +529,12 @@
       "buy_pct": 0.6121,
       "sell_pct": 0.3879
     },
-    "total_fills": 518735
+    "total_fills": 518736
   },
   "account_characteristics": {
     "weight": 0.07,
-    "account_value_usd": 11959577.52,
+    "account_value_usd": 11992034.24,
     "total_volume_usd": 492524904.46,
-    "weekly_volume_usd": 44231074.85
+    "weekly_volume_usd": 43550978.32
   }
 }
