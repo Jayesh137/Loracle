@@ -1,10 +1,10 @@
 {
   "version": "1.0",
-  "computed_at": "2026-08-07T02:25:32.413459+00:00",
+  "computed_at": "2026-08-08T01:12:38.328396+00:00",
   "data_range": {
     "first_fill": "2026-05-01T20:03:41.142000+00:00",
-    "last_fill": "2026-08-06T20:18:03.341000+00:00",
-    "total_fills": 650316,
+    "last_fill": "2026-08-07T09:17:25.168000+00:00",
+    "total_fills": 657985,
     "total_days_active": 97
   },
   "asset_preferences": {
@@ -52,29 +52,29 @@
       "xyz:XYZ100"
     ],
     "coin_frequency": {
-      "HYPE": 0.1915,
-      "@107": 0.1447,
-      "NEAR": 0.0911,
-      "ZEC": 0.0859,
-      "TON": 0.0529,
-      "SOL": 0.0516,
-      "xyz:CBRS": 0.0408,
-      "AAVE": 0.0352,
-      "LIT": 0.0348,
-      "XPL": 0.0285,
-      "BTC": 0.0283,
-      "AZTEC": 0.0269,
-      "xyz:CL": 0.0268,
-      "WLD": 0.0223,
-      "xyz:SNDK": 0.0214,
-      "VVV": 0.0189,
-      "XMR": 0.014,
+      "HYPE": 0.2009,
+      "@107": 0.143,
+      "NEAR": 0.09,
+      "ZEC": 0.0849,
+      "TON": 0.0523,
+      "SOL": 0.051,
+      "xyz:CBRS": 0.0404,
+      "AAVE": 0.0348,
+      "LIT": 0.0344,
+      "XPL": 0.0282,
+      "BTC": 0.028,
+      "AZTEC": 0.0266,
+      "xyz:CL": 0.0264,
+      "WLD": 0.0221,
+      "xyz:SNDK": 0.0212,
+      "VVV": 0.0187,
+      "XMR": 0.0138,
       "ETH": 0.0121,
-      "ASTER": 0.0115,
-      "xyz:SKHX": 0.0113,
-      "KAITO": 0.011,
-      "xyz:TSLA": 0.0109,
-      "xyz:NVDA": 0.0068,
+      "ASTER": 0.0113,
+      "xyz:SKHX": 0.0112,
+      "KAITO": 0.0108,
+      "xyz:TSLA": 0.0108,
+      "xyz:NVDA": 0.0067,
       "CHIP": 0.006,
       "PAXG": 0.0055,
       "xyz:XYZ100": 0.004,
@@ -96,19 +96,15 @@
     "top_5_by_volume": [
       "HYPE",
       "BTC",
+      "ETH",
       "@107",
-      "ZEC",
-      "xyz:CL"
+      "ZEC"
     ],
     "total_unique_coins": 40
   },
   "leverage_profile": {
     "weight": 0.15,
     "per_coin": {
-      "ETH": {
-        "value": 20.0,
-        "type": "cross"
-      },
       "HYPE": {
         "value": 2.0,
         "type": "cross"
@@ -123,9 +119,9 @@
       }
     },
     "overall": {
-      "mean": 8.0,
+      "mean": 4.0,
       "median": 5.0,
-      "max": 20.0
+      "max": 5.0
     }
   },
   "position_sizing": {
@@ -322,9 +318,9 @@
         "mean_usd": 13905.51
       },
       "ETH": {
-        "typical_min_usd": 28635062.68,
-        "typical_max_usd": 28635062.68,
-        "mean_usd": 28635062.68
+        "typical_min_usd": 2878228.47,
+        "typical_max_usd": 25773192.21,
+        "mean_usd": 14325710.34
       },
       "KAITO": {
         "typical_min_usd": 833575.68,
@@ -333,58 +329,58 @@
       }
     },
     "size_to_account_ratio": {
-      "mean": 0.3837,
-      "median": 0.0429,
-      "std": 0.8013
+      "mean": 0.3959,
+      "median": 0.0416,
+      "std": 0.8357
     },
-    "account_value_usd": 18127389.36,
-    "total_positions": 57
+    "account_value_usd": 17265294.19,
+    "total_positions": 58
   },
   "timing_profile": {
     "weight": 0.15,
     "hourly_distribution": [
-      0.0416,
-      0.0387,
-      0.0316,
-      0.0318,
-      0.0318,
-      0.0338,
-      0.0386,
-      0.0487,
+      0.042,
+      0.0392,
+      0.0322,
+      0.0323,
+      0.0324,
+      0.0344,
+      0.0391,
+      0.049,
       0.0526,
-      0.0543,
-      0.0468,
-      0.0458,
-      0.0378,
-      0.0339,
-      0.0425,
-      0.0502,
-      0.0498,
-      0.041,
-      0.0449,
-      0.0396,
-      0.0402,
-      0.045,
-      0.0436,
-      0.0353
+      0.0538,
+      0.0463,
+      0.0452,
+      0.0374,
+      0.0335,
+      0.042,
+      0.0497,
+      0.0492,
+      0.0405,
+      0.0443,
+      0.0391,
+      0.0404,
+      0.0455,
+      0.0441,
+      0.0359
     ],
     "day_of_week_distribution": [
-      0.1712,
-      0.0645,
-      0.1139,
-      0.1566,
-      0.1261,
-      0.1845,
-      0.1832
+      0.1692,
+      0.0637,
+      0.1126,
+      0.1583,
+      0.1328,
+      0.1823,
+      0.181
     ],
     "most_active_hours_utc": [
       7,
       8,
       9,
       10,
-      11,
       15,
-      16
+      16,
+      21
     ],
     "least_active_hours_utc": [
       2,
@@ -398,10 +394,10 @@
   "hold_duration": {
     "weight": 0.1,
     "overall_minutes": {
-      "mean": 17813.8,
-      "median": 6805.7,
-      "p25": 869.1,
-      "p75": 23458.4
+      "mean": 17436.0,
+      "median": 7398.4,
+      "p25": 913.7,
+      "p75": 21800.0
     },
     "per_coin": {
       "HYPE": {
@@ -483,44 +479,48 @@
       "#7390": {
         "mean_minutes": 1047.3,
         "median_minutes": 1047.3
+      },
+      "ETH": {
+        "mean_minutes": 7991.1,
+        "median_minutes": 7991.1
       }
     },
     "distribution_buckets": {
-      "under_1h": 0.04,
-      "1h_to_4h": 0.04,
-      "4h_to_24h": 0.28,
-      "1d_to_7d": 0.24,
-      "over_7d": 0.4
+      "under_1h": 0.0385,
+      "1h_to_4h": 0.0385,
+      "4h_to_24h": 0.2692,
+      "1d_to_7d": 0.2692,
+      "over_7d": 0.3846
     }
   },
   "entry_exit_style": {
     "weight": 0.1,
     "order_type_ratio": {
-      "market": 0.8828,
-      "limit": 0.1172
+      "market": 0.8842,
+      "limit": 0.1158
     },
     "take_profit_pnl": {
       "mean": 509209.24,
       "median": 1811.17
     },
     "stop_loss_pnl": {
-      "mean": -1784423.01,
-      "median": -12821.67
+      "mean": -1724713.68,
+      "median": -14015.15
     },
     "fee_stats": {
-      "total": 133460.04,
-      "mean": 0.2052
+      "total": 142859.67,
+      "mean": 0.2171
     },
-    "total_closed_trades": 25,
-    "win_rate": 0.48
+    "total_closed_trades": 26,
+    "win_rate": 0.4615
   },
   "risk_management": {
     "weight": 0.08,
-    "margin_utilization": 0.9196,
-    "account_value_usd": 18127389.36,
-    "total_margin_used": 16669307.79,
-    "current_positions_count": 4,
-    "max_simultaneous_positions": 4,
+    "margin_utilization": 0.8913,
+    "account_value_usd": 17265294.19,
+    "total_margin_used": 15389239.47,
+    "current_positions_count": 3,
+    "max_simultaneous_positions": 3,
     "holds_through_funding": true,
     "total_funding_events": 2257
   },
@@ -531,15 +531,15 @@
       "median_minutes": 0.1
     },
     "buy_sell_ratio": {
-      "buy_pct": 0.5032,
-      "sell_pct": 0.4968
+      "buy_pct": 0.4975,
+      "sell_pct": 0.5025
     },
-    "total_fills": 650316
+    "total_fills": 657985
   },
   "account_characteristics": {
     "weight": 0.07,
-    "account_value_usd": 18127389.36,
-    "total_volume_usd": 622210539.39,
-    "weekly_volume_usd": 44897172.58
+    "account_value_usd": 17265294.19,
+    "total_volume_usd": 653542648.86,
+    "weekly_volume_usd": 46896382.15
   }
 }
