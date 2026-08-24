@@ -1,8 +1,88 @@
 {
-  "scan_time": "2026-08-23T18:34:26.734419+00:00",
+  "scan_time": "2026-08-24T01:10:33.864083+00:00",
   "wallets_scanned": 499,
   "matches_found": 104,
   "results": [
+    {
+      "wallet": "0xe7ec7fbf4f195fc8e57d814e15c3a2857cb632a3",
+      "score": 0.6614,
+      "dimensions": {
+        "asset_preferences": 0.5,
+        "timing_profile": 0.6197,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 0.9998,
+        "hold_duration": 0.0
+      },
+      "fills_count": 1791,
+      "scanned_at": "2026-08-24T01:10:25.704254+00:00",
+      "fingerprint": {
+        "asset_preferences": {
+          "coins_traded": [
+            "HYPE",
+            "PUMP"
+          ],
+          "coin_frequency": {
+            "HYPE": 0.9726,
+            "PUMP": 0.0274
+          },
+          "top_5_by_volume": [
+            "HYPE",
+            "PUMP"
+          ]
+        },
+        "timing_profile": {
+          "hourly_distribution": [
+            0.0,
+            0.0,
+            0.0,
+            0.9726,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0274,
+            0.0
+          ],
+          "most_active_hours_utc": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            22
+          ]
+        },
+        "leverage_profile": {
+          "overall": {}
+        },
+        "entry_exit_style": {
+          "order_type_ratio": {
+            "market": 0.9799,
+            "limit": 0.0201
+          },
+          "win_rate": 0
+        },
+        "hold_duration": {
+          "overall_minutes": {},
+          "distribution_buckets": {}
+        }
+      }
+    },
     {
       "wallet": "0x9546b9d4103be41ce13483a8f299d0df0eeb181c",
       "score": 0.6233,
@@ -14,7 +94,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:01.999920+00:00",
+      "scanned_at": "2026-08-24T00:56:36.241502+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -88,6 +168,114 @@
       }
     },
     {
+      "wallet": "0xa84c6fd42d4e5c2e9ffbdf452041a3485b170885",
+      "score": 0.6218,
+      "dimensions": {
+        "asset_preferences": 0.1429,
+        "timing_profile": 0.7045,
+        "leverage_profile": 0.8333,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:07:08.410732+00:00",
+      "fingerprint": {
+        "asset_preferences": {
+          "coins_traded": [
+            "BTC",
+            "HYPE",
+            "xyz:DRAM",
+            "xyz:NBIS",
+            "xyz:SKHX",
+            "xyz:SNDK",
+            "xyz:SPCX"
+          ],
+          "coin_frequency": {
+            "xyz:SKHX": 0.2975,
+            "HYPE": 0.265,
+            "xyz:SNDK": 0.2485,
+            "xyz:DRAM": 0.092,
+            "BTC": 0.0535,
+            "xyz:NBIS": 0.0405,
+            "xyz:SPCX": 0.003
+          },
+          "top_5_by_volume": [
+            "xyz:SNDK",
+            "xyz:SKHX",
+            "HYPE",
+            "BTC",
+            "xyz:DRAM"
+          ]
+        },
+        "timing_profile": {
+          "hourly_distribution": [
+            0.003,
+            0.0465,
+            0.248,
+            0.09,
+            0.0985,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.16,
+            0.044,
+            0.0145,
+            0.0345,
+            0.0135,
+            0.03,
+            0.0575,
+            0.0055,
+            0.065,
+            0.059,
+            0.0305
+          ],
+          "most_active_hours_utc": [
+            2,
+            3,
+            4,
+            13,
+            19,
+            21,
+            22
+          ]
+        },
+        "leverage_profile": {
+          "overall": {
+            "mean": 2.5,
+            "median": 2.5,
+            "max": 4.0
+          }
+        },
+        "entry_exit_style": {
+          "order_type_ratio": {
+            "market": 0.9985,
+            "limit": 0.0015
+          },
+          "win_rate": 0.439
+        },
+        "hold_duration": {
+          "overall_minutes": {
+            "mean": 30.0,
+            "median": 18.4,
+            "p25": 7.8,
+            "p75": 32.5
+          },
+          "distribution_buckets": {
+            "under_1h": 0.878,
+            "1h_to_4h": 0.0976,
+            "4h_to_24h": 0.0244,
+            "1d_to_7d": 0.0,
+            "over_7d": 0.0
+          }
+        }
+      }
+    },
+    {
       "wallet": "0xca230e816bdb34a46960c2f978a30a563d1ae9e0",
       "score": 0.5956,
       "dimensions": {
@@ -98,7 +286,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:24:03.541950+00:00",
+      "scanned_at": "2026-08-24T01:00:03.145969+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -184,16 +372,16 @@
     },
     {
       "wallet": "0xb67c4c91728e6865b216e11d54b50c75bbd3fd5f",
-      "score": 0.5934,
+      "score": 0.579,
       "dimensions": {
         "asset_preferences": 1.0,
-        "timing_profile": 0.0,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9048,
+        "timing_profile": 0.233,
+        "leverage_profile": 0.3,
+        "entry_exit_style": 0.8259,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:58.268777+00:00",
+      "scanned_at": "2026-08-24T00:57:35.155719+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -208,7 +396,12 @@
         },
         "timing_profile": {
           "hourly_distribution": [
-            0.6925,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.5275,
+            0.4725,
             0.0,
             0.0,
             0.0,
@@ -226,12 +419,7 @@
             0.0,
             0.0,
             0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.3075
+            0.0
           ],
           "most_active_hours_utc": [
             0,
@@ -240,138 +428,34 @@
             3,
             4,
             5,
-            23
+            6
           ]
         },
         "leverage_profile": {
-          "overall": {}
+          "overall": {
+            "mean": 10.0,
+            "median": 10.0,
+            "max": 10.0
+          }
         },
         "entry_exit_style": {
           "order_type_ratio": {
-            "market": 0.6785,
-            "limit": 0.3215
+            "market": 0.593,
+            "limit": 0.407
           },
-          "win_rate": 0.6
+          "win_rate": 0.3846
         },
         "hold_duration": {
           "overall_minutes": {
-            "mean": 12.4,
-            "median": 9.8,
-            "p25": 2.6,
-            "p75": 21.6
+            "mean": 4.9,
+            "median": 2.5,
+            "p25": 1.5,
+            "p75": 7.8
           },
           "distribution_buckets": {
             "under_1h": 1.0,
             "1h_to_4h": 0.0,
             "4h_to_24h": 0.0,
-            "1d_to_7d": 0.0,
-            "over_7d": 0.0
-          }
-        }
-      }
-    },
-    {
-      "wallet": "0xa84c6fd42d4e5c2e9ffbdf452041a3485b170885",
-      "score": 0.5811,
-      "dimensions": {
-        "asset_preferences": 0.1429,
-        "timing_profile": 0.6994,
-        "leverage_profile": 0.6667,
-        "entry_exit_style": 1.0,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:31:12.675478+00:00",
-      "fingerprint": {
-        "asset_preferences": {
-          "coins_traded": [
-            "BTC",
-            "HYPE",
-            "xyz:DRAM",
-            "xyz:NBIS",
-            "xyz:SKHX",
-            "xyz:SNDK",
-            "xyz:SPCX"
-          ],
-          "coin_frequency": {
-            "xyz:SKHX": 0.2975,
-            "HYPE": 0.265,
-            "xyz:SNDK": 0.2485,
-            "xyz:DRAM": 0.092,
-            "BTC": 0.073,
-            "xyz:NBIS": 0.0215,
-            "xyz:SPCX": 0.0025
-          },
-          "top_5_by_volume": [
-            "xyz:SNDK",
-            "xyz:SKHX",
-            "BTC",
-            "HYPE",
-            "xyz:DRAM"
-          ]
-        },
-        "timing_profile": {
-          "hourly_distribution": [
-            0.003,
-            0.0465,
-            0.248,
-            0.09,
-            0.0985,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.16,
-            0.044,
-            0.0145,
-            0.015,
-            0.0135,
-            0.03,
-            0.0575,
-            0.0055,
-            0.0815,
-            0.062,
-            0.0305
-          ],
-          "most_active_hours_utc": [
-            2,
-            3,
-            4,
-            13,
-            19,
-            21,
-            22
-          ]
-        },
-        "leverage_profile": {
-          "overall": {
-            "mean": 2.0,
-            "median": 1.0,
-            "max": 4.0
-          }
-        },
-        "entry_exit_style": {
-          "order_type_ratio": {
-            "market": 0.9985,
-            "limit": 0.0015
-          },
-          "win_rate": 0.4419
-        },
-        "hold_duration": {
-          "overall_minutes": {
-            "mean": 29.5,
-            "median": 18.4,
-            "p25": 7.5,
-            "p75": 33.1
-          },
-          "distribution_buckets": {
-            "under_1h": 0.8837,
-            "1h_to_4h": 0.093,
-            "4h_to_24h": 0.0233,
             "1d_to_7d": 0.0,
             "over_7d": 0.0
           }
@@ -389,7 +473,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:27:00.619518+00:00",
+      "scanned_at": "2026-08-24T01:03:11.544636+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -463,111 +547,17 @@
       }
     },
     {
-      "wallet": "0x3be714dbe0d3a33ae89b04f8caf93364c98b4b1f",
-      "score": 0.5643,
-      "dimensions": {
-        "asset_preferences": 0.3333,
-        "timing_profile": 0.6245,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.8489,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:31:14.337275+00:00",
-      "fingerprint": {
-        "asset_preferences": {
-          "coins_traded": [
-            "HYPE",
-            "PUMP",
-            "xyz:SP500"
-          ],
-          "coin_frequency": {
-            "PUMP": 0.8745,
-            "HYPE": 0.0655,
-            "xyz:SP500": 0.06
-          },
-          "top_5_by_volume": [
-            "PUMP",
-            "HYPE",
-            "xyz:SP500"
-          ]
-        },
-        "timing_profile": {
-          "hourly_distribution": [
-            0.066,
-            0.513,
-            0.2455,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.025,
-            0.0,
-            0.0055,
-            0.13,
-            0.015
-          ],
-          "most_active_hours_utc": [
-            0,
-            1,
-            2,
-            19,
-            21,
-            22,
-            23
-          ]
-        },
-        "leverage_profile": {
-          "overall": {}
-        },
-        "entry_exit_style": {
-          "order_type_ratio": {
-            "market": 0.615,
-            "limit": 0.385
-          },
-          "win_rate": 0.0
-        },
-        "hold_duration": {
-          "overall_minutes": {
-            "mean": 163.8,
-            "median": 163.8,
-            "p25": 163.8,
-            "p75": 163.8
-          },
-          "distribution_buckets": {
-            "under_1h": 0.0,
-            "1h_to_4h": 1.0,
-            "4h_to_24h": 0.0,
-            "1d_to_7d": 0.0,
-            "over_7d": 0.0
-          }
-        }
-      }
-    },
-    {
       "wallet": "0xbc76170c8a15b34941ba9e00567d7e0f11ba417c",
-      "score": 0.5576,
+      "score": 0.5547,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.8497,
+        "timing_profile": 0.8423,
         "leverage_profile": 0.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:29.878890+00:00",
+      "scanned_at": "2026-08-24T00:57:27.365656+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -598,17 +588,17 @@
             0.053,
             0.0765,
             0.0,
-            0.027,
+            0.0745,
             0.0,
             0.0,
             0.0,
             0.0,
             0.0,
-            0.0195,
             0.0,
             0.0,
             0.0,
-            0.028
+            0.0,
+            0.0
           ],
           "most_active_hours_utc": [
             1,
@@ -617,7 +607,7 @@
             4,
             10,
             11,
-            23
+            13
           ]
         },
         "leverage_profile": {
@@ -628,19 +618,19 @@
             "market": 1.0,
             "limit": 0.0
           },
-          "win_rate": 0.4
+          "win_rate": 0.3333
         },
         "hold_duration": {
           "overall_minutes": {
-            "mean": 94.0,
-            "median": 40.3,
-            "p25": 26.8,
-            "p75": 122.5
+            "mean": 32.1,
+            "median": 22.9,
+            "p25": 8.3,
+            "p75": 44.8
           },
           "distribution_buckets": {
-            "under_1h": 0.7,
-            "1h_to_4h": 0.2,
-            "4h_to_24h": 0.1,
+            "under_1h": 0.8333,
+            "1h_to_4h": 0.1667,
+            "4h_to_24h": 0.0,
             "1d_to_7d": 0.0,
             "over_7d": 0.0
           }
@@ -649,16 +639,16 @@
     },
     {
       "wallet": "0x9bbb821a51d9c0ef24dd8592e9caad7fc469bbf2",
-      "score": 0.5434,
+      "score": 0.5439,
       "dimensions": {
         "asset_preferences": 0.25,
-        "timing_profile": 0.1979,
+        "timing_profile": 0.1994,
         "leverage_profile": 1.0,
-        "entry_exit_style": 0.9996,
+        "entry_exit_style": 0.9995,
         "hold_duration": 0.0
       },
-      "fills_count": 1531,
-      "scanned_at": "2026-08-23T18:30:35.003754+00:00",
+      "fills_count": 1455,
+      "scanned_at": "2026-08-24T01:06:58.339519+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -668,10 +658,10 @@
             "xyz:SNDK"
           ],
           "coin_frequency": {
-            "HYPE": 0.5108,
-            "xyz:SNDK": 0.194,
-            "ZEC": 0.1816,
-            "xyz:MRNA": 0.1137
+            "HYPE": 0.5375,
+            "ZEC": 0.1911,
+            "xyz:SNDK": 0.1519,
+            "xyz:MRNA": 0.1196
           },
           "top_5_by_volume": [
             "HYPE",
@@ -683,26 +673,26 @@
         "timing_profile": {
           "hourly_distribution": [
             0.0,
-            0.1816,
+            0.1911,
             0.0,
             0.0,
             0.0,
-            0.079,
+            0.0832,
             0.0,
             0.0,
-            0.1639,
-            0.096,
-            0.0,
-            0.0,
-            0.0,
-            0.2769,
-            0.0,
-            0.0934,
+            0.1725,
+            0.101,
             0.0,
             0.0,
             0.0,
-            0.0496,
-            0.0594,
+            0.2914,
+            0.0,
+            0.0983,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0625,
             0.0,
             0.0,
             0.0
@@ -726,8 +716,8 @@
         },
         "entry_exit_style": {
           "order_type_ratio": {
-            "market": 0.9686,
-            "limit": 0.0314
+            "market": 0.967,
+            "limit": 0.033
           },
           "win_rate": 0.3333
         },
@@ -759,7 +749,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:21.881871+00:00",
+      "scanned_at": "2026-08-24T00:57:17.045192+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -840,7 +830,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:24:02.029935+00:00",
+      "scanned_at": "2026-08-24T01:00:01.965742+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -922,32 +912,44 @@
       }
     },
     {
-      "wallet": "0x007d76eec0ba411ce873a8819df50dd443d967a0",
-      "score": 0.5412,
+      "wallet": "0xc87edc449d9120cc3059890cb7e71b1d3771ff2f",
+      "score": 0.5278,
       "dimensions": {
-        "asset_preferences": 1.0,
-        "timing_profile": 0.0,
-        "leverage_profile": 0.3,
-        "entry_exit_style": 1.0,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.5292,
+        "leverage_profile": 0.8571,
+        "entry_exit_style": 0.9661,
         "hold_duration": 0.0
       },
-      "fills_count": 268,
-      "scanned_at": "2026-08-23T18:29:34.340149+00:00",
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:03:15.688645+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
-            "HYPE"
+            "xyz:BE",
+            "xyz:EWY",
+            "xyz:MU",
+            "xyz:SNDK"
           ],
           "coin_frequency": {
-            "HYPE": 1.0
+            "xyz:SNDK": 0.7855,
+            "xyz:BE": 0.1925,
+            "xyz:EWY": 0.021,
+            "xyz:MU": 0.001
           },
           "top_5_by_volume": [
-            "HYPE"
+            "xyz:SNDK",
+            "xyz:BE",
+            "xyz:EWY",
+            "xyz:MU"
           ]
         },
         "timing_profile": {
           "hourly_distribution": [
             0.0,
+            0.0425,
+            0.4415,
+            0.002,
             0.0,
             0.0,
             0.0,
@@ -955,235 +957,55 @@
             0.0,
             0.0,
             0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
+            0.0575,
+            0.0125,
+            0.2055,
+            0.0995,
+            0.0785,
+            0.0075,
+            0.006,
+            0.008,
+            0.0355,
+            0.0035,
             0.0,
             0.0,
             0.0
           ],
           "most_active_hours_utc": [
-            0,
             1,
             2,
-            3,
-            4,
-            5,
-            9
+            11,
+            13,
+            14,
+            15,
+            19
           ]
         },
         "leverage_profile": {
           "overall": {
-            "mean": 10.0,
-            "median": 10.0,
-            "max": 10.0
+            "mean": 3.5,
+            "median": 3.5,
+            "max": 4.0
           }
         },
         "entry_exit_style": {
           "order_type_ratio": {
-            "market": 1.0,
-            "limit": 0.0
+            "market": 0.7875,
+            "limit": 0.2125
           },
-          "win_rate": 0
-        },
-        "hold_duration": {
-          "overall_minutes": {},
-          "distribution_buckets": {}
-        }
-      }
-    },
-    {
-      "wallet": "0xcbeca4cdbfd889186f55fc2a1c83ecc70d18ef3b",
-      "score": 0.5364,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.8001,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9909,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:24:56.602054+00:00",
-      "fingerprint": {
-        "asset_preferences": {
-          "coins_traded": [
-            "BTC",
-            "ETH",
-            "LINK",
-            "xyz:SKHX"
-          ],
-          "coin_frequency": {
-            "ETH": 0.533,
-            "BTC": 0.415,
-            "LINK": 0.0345,
-            "xyz:SKHX": 0.0175
-          },
-          "top_5_by_volume": [
-            "ETH",
-            "BTC",
-            "LINK",
-            "xyz:SKHX"
-          ]
-        },
-        "timing_profile": {
-          "hourly_distribution": [
-            0.083,
-            0.1065,
-            0.2175,
-            0.172,
-            0.015,
-            0.038,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0545,
-            0.03,
-            0.12,
-            0.0865,
-            0.019,
-            0.0055,
-            0.0,
-            0.0,
-            0.0,
-            0.026,
-            0.0125,
-            0.014
-          ],
-          "most_active_hours_utc": [
-            0,
-            1,
-            2,
-            3,
-            12,
-            14,
-            15
-          ]
-        },
-        "leverage_profile": {
-          "overall": {}
-        },
-        "entry_exit_style": {
-          "order_type_ratio": {
-            "market": 0.8785,
-            "limit": 0.1215
-          },
-          "win_rate": 0.3913
+          "win_rate": 0.8409
         },
         "hold_duration": {
           "overall_minutes": {
-            "mean": 261.8,
-            "median": 28.5,
-            "p25": 8.8,
-            "p75": 394.2
+            "mean": 37.7,
+            "median": 3.1,
+            "p25": 0.5,
+            "p75": 15.6
           },
           "distribution_buckets": {
-            "under_1h": 0.6087,
-            "1h_to_4h": 0.087,
-            "4h_to_24h": 0.3043,
-            "1d_to_7d": 0.0,
-            "over_7d": 0.0
-          }
-        }
-      }
-    },
-    {
-      "wallet": "0x16588c497a83e9dfa298d048553a4ef5fd52f65b",
-      "score": 0.5263,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.7685,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9997,
-        "hold_duration": 0.0
-      },
-      "fills_count": 1861,
-      "scanned_at": "2026-08-23T18:23:34.253320+00:00",
-      "fingerprint": {
-        "asset_preferences": {
-          "coins_traded": [
-            "BTC",
-            "ETH"
-          ],
-          "coin_frequency": {
-            "ETH": 0.9178,
-            "BTC": 0.0822
-          },
-          "top_5_by_volume": [
-            "ETH",
-            "BTC"
-          ]
-        },
-        "timing_profile": {
-          "hourly_distribution": [
-            0.0,
-            0.0124,
-            0.1542,
-            0.3004,
-            0.0505,
-            0.0623,
-            0.0285,
-            0.0,
-            0.1042,
-            0.014,
-            0.014,
-            0.0425,
-            0.0199,
-            0.0102,
-            0.0376,
-            0.0973,
-            0.0317,
-            0.0064,
-            0.0,
-            0.0,
-            0.014,
-            0.0,
-            0.0,
-            0.0
-          ],
-          "most_active_hours_utc": [
-            2,
-            3,
-            4,
-            5,
-            8,
-            11,
-            15
-          ]
-        },
-        "leverage_profile": {
-          "overall": {}
-        },
-        "entry_exit_style": {
-          "order_type_ratio": {
-            "market": 0.9747,
-            "limit": 0.0253
-          },
-          "win_rate": 1.0
-        },
-        "hold_duration": {
-          "overall_minutes": {
-            "mean": 37.2,
-            "median": 37.2,
-            "p25": 37.2,
-            "p75": 37.2
-          },
-          "distribution_buckets": {
-            "under_1h": 1.0,
-            "1h_to_4h": 0.0,
-            "4h_to_24h": 0.0,
+            "under_1h": 0.8864,
+            "1h_to_4h": 0.0682,
+            "4h_to_24h": 0.0455,
             "1d_to_7d": 0.0,
             "over_7d": 0.0
           }
@@ -1192,16 +1014,16 @@
     },
     {
       "wallet": "0xcf7c4feb434751146a48b895e96caeb15838f92c",
-      "score": 0.5259,
+      "score": 0.5257,
       "dimensions": {
         "asset_preferences": 0.0909,
-        "timing_profile": 0.2971,
+        "timing_profile": 0.2964,
         "leverage_profile": 1.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:26:25.592682+00:00",
+      "scanned_at": "2026-08-24T01:02:53.985925+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -1218,15 +1040,15 @@
             "xyz:SPCX"
           ],
           "coin_frequency": {
-            "xyz:SKHX": 0.298,
-            "BTC": 0.258,
+            "xyz:SKHX": 0.296,
+            "BTC": 0.2605,
             "xyz:SP500": 0.236,
             "HYPE": 0.0755,
-            "xyz:MU": 0.0575,
+            "xyz:MU": 0.0585,
             "xyz:GOLD": 0.021,
             "xyz:DRAM": 0.016,
             "@142": 0.016,
-            "xyz:SNDK": 0.015,
+            "xyz:SNDK": 0.0135,
             "xyz:SPCX": 0.0035,
             "ETH": 0.0035
           },
@@ -1250,7 +1072,7 @@
             0.0,
             0.0,
             0.0,
-            0.0935,
+            0.097,
             0.021,
             0.0,
             0.0035,
@@ -1259,7 +1081,7 @@
             0.0145,
             0.0995,
             0.0375,
-            0.01,
+            0.0065,
             0.0145,
             0.017,
             0.0,
@@ -1291,16 +1113,16 @@
         },
         "hold_duration": {
           "overall_minutes": {
-            "mean": 935.9,
+            "mean": 761.4,
             "median": 200.4,
             "p25": 39.3,
-            "p75": 1817.0
+            "p75": 1134.6
           },
           "distribution_buckets": {
             "under_1h": 0.3333,
             "1h_to_4h": 0.2,
-            "4h_to_24h": 0.1333,
-            "1d_to_7d": 0.3333,
+            "4h_to_24h": 0.2667,
+            "1d_to_7d": 0.2,
             "over_7d": 0.0
           }
         }
@@ -1317,7 +1139,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:27:03.557031+00:00",
+      "scanned_at": "2026-08-24T01:03:02.587082+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -1419,168 +1241,73 @@
       }
     },
     {
-      "wallet": "0xc87edc449d9120cc3059890cb7e71b1d3771ff2f",
-      "score": 0.5249,
+      "wallet": "0xd1f73853fc7fb3bdfadb9382a695c2ab15f8d62d",
+      "score": 0.5211,
       "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.536,
-        "leverage_profile": 0.8571,
-        "entry_exit_style": 0.9385,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:27:28.341579+00:00",
-      "fingerprint": {
-        "asset_preferences": {
-          "coins_traded": [
-            "xyz:BE",
-            "xyz:MU",
-            "xyz:SNDK"
-          ],
-          "coin_frequency": {
-            "xyz:SNDK": 0.843,
-            "xyz:BE": 0.152,
-            "xyz:MU": 0.005
-          },
-          "top_5_by_volume": [
-            "xyz:SNDK",
-            "xyz:BE",
-            "xyz:MU"
-          ]
-        },
-        "timing_profile": {
-          "hourly_distribution": [
-            0.138,
-            0.0425,
-            0.4415,
-            0.002,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0575,
-            0.0125,
-            0.1705,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.011,
-            0.0585,
-            0.034,
-            0.0105,
-            0.0045,
-            0.017
-          ],
-          "most_active_hours_utc": [
-            0,
-            1,
-            2,
-            11,
-            13,
-            19,
-            20
-          ]
-        },
-        "leverage_profile": {
-          "overall": {
-            "mean": 3.5,
-            "median": 3.5,
-            "max": 4.0
-          }
-        },
-        "entry_exit_style": {
-          "order_type_ratio": {
-            "market": 0.7295,
-            "limit": 0.2705
-          },
-          "win_rate": 0.8966
-        },
-        "hold_duration": {
-          "overall_minutes": {
-            "mean": 69.9,
-            "median": 0.9,
-            "p25": 0.3,
-            "p75": 46.3
-          },
-          "distribution_buckets": {
-            "under_1h": 0.8276,
-            "1h_to_4h": 0.069,
-            "4h_to_24h": 0.1034,
-            "1d_to_7d": 0.0,
-            "over_7d": 0.0
-          }
-        }
-      }
-    },
-    {
-      "wallet": "0x9e0a3ad8216952b1ffaa03772b0cae25691679b2",
-      "score": 0.5197,
-      "dimensions": {
-        "asset_preferences": 0.3333,
-        "timing_profile": 0.4179,
+        "asset_preferences": 0.25,
+        "timing_profile": 0.5069,
         "leverage_profile": 0.0,
-        "entry_exit_style": 1.0,
+        "entry_exit_style": 0.9966,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:35.715604+00:00",
+      "scanned_at": "2026-08-24T01:02:43.289644+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
             "BTC",
+            "HEMI",
             "HYPE",
-            "TRUMP"
+            "xyz:SKHX"
           ],
           "coin_frequency": {
-            "BTC": 0.5285,
-            "TRUMP": 0.253,
-            "HYPE": 0.2185
+            "xyz:SKHX": 0.5865,
+            "HYPE": 0.2865,
+            "BTC": 0.116,
+            "HEMI": 0.011
           },
           "top_5_by_volume": [
+            "xyz:SKHX",
             "BTC",
             "HYPE",
-            "TRUMP"
+            "HEMI"
           ]
         },
         "timing_profile": {
           "hourly_distribution": [
             0.0,
-            0.0,
-            0.1895,
-            0.0,
-            0.152,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            0.126,
-            0.0,
-            0.0,
-            0.023,
+            0.0325,
+            0.2015,
+            0.05,
+            0.0295,
+            0.0275,
+            0.0325,
             0.0395,
-            0.0345,
-            0.0685,
+            0.051,
+            0.0075,
             0.0,
+            0.0505,
+            0.0,
+            0.024,
+            0.1185,
+            0.1815,
+            0.0835,
             0.0315,
             0.0,
-            0.104,
-            0.0275,
-            0.204,
+            0.039,
+            0.0,
+            0.0,
             0.0,
             0.0
           ],
           "most_active_hours_utc": [
             2,
-            4,
-            9,
-            13,
+            3,
+            8,
+            11,
+            14,
             15,
-            19,
-            21
+            16
           ]
         },
         "leverage_profile": {
@@ -1588,22 +1315,22 @@
         },
         "entry_exit_style": {
           "order_type_ratio": {
-            "market": 0.9935,
-            "limit": 0.0065
+            "market": 0.921,
+            "limit": 0.079
           },
-          "win_rate": 1.0
+          "win_rate": 0.4545
         },
         "hold_duration": {
           "overall_minutes": {
-            "mean": 217.4,
-            "median": 217.4,
-            "p25": 158.8,
-            "p75": 276.0
+            "mean": 86.2,
+            "median": 30.7,
+            "p25": 8.2,
+            "p75": 65.7
           },
           "distribution_buckets": {
-            "under_1h": 0.0,
-            "1h_to_4h": 0.5,
-            "4h_to_24h": 0.5,
+            "under_1h": 0.7273,
+            "1h_to_4h": 0.1364,
+            "4h_to_24h": 0.1364,
             "1d_to_7d": 0.0,
             "over_7d": 0.0
           }
@@ -1621,7 +1348,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 526,
-      "scanned_at": "2026-08-23T18:32:30.498838+00:00",
+      "scanned_at": "2026-08-24T01:10:24.192382+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -1702,6 +1429,104 @@
       }
     },
     {
+      "wallet": "0x9e0a3ad8216952b1ffaa03772b0cae25691679b2",
+      "score": 0.4983,
+      "dimensions": {
+        "asset_preferences": 0.3333,
+        "timing_profile": 0.4179,
+        "leverage_profile": 0.4286,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:05:30.137378+00:00",
+      "fingerprint": {
+        "asset_preferences": {
+          "coins_traded": [
+            "BTC",
+            "HYPE",
+            "TRUMP"
+          ],
+          "coin_frequency": {
+            "BTC": 0.5285,
+            "TRUMP": 0.253,
+            "HYPE": 0.2185
+          },
+          "top_5_by_volume": [
+            "BTC",
+            "HYPE",
+            "TRUMP"
+          ]
+        },
+        "timing_profile": {
+          "hourly_distribution": [
+            0.0,
+            0.0,
+            0.1895,
+            0.0,
+            0.152,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.126,
+            0.0,
+            0.0,
+            0.023,
+            0.0395,
+            0.0345,
+            0.0685,
+            0.0,
+            0.0315,
+            0.0,
+            0.104,
+            0.0275,
+            0.204,
+            0.0,
+            0.0
+          ],
+          "most_active_hours_utc": [
+            2,
+            4,
+            9,
+            13,
+            15,
+            19,
+            21
+          ]
+        },
+        "leverage_profile": {
+          "overall": {
+            "mean": 7.0,
+            "median": 7.0,
+            "max": 7.0
+          }
+        },
+        "entry_exit_style": {
+          "order_type_ratio": {
+            "market": 0.9935,
+            "limit": 0.0065
+          },
+          "win_rate": 1.0
+        },
+        "hold_duration": {
+          "overall_minutes": {
+            "mean": 217.4,
+            "median": 217.4,
+            "p25": 158.8,
+            "p75": 276.0
+          },
+          "distribution_buckets": {
+            "under_1h": 0.0,
+            "1h_to_4h": 0.5,
+            "4h_to_24h": 0.5,
+            "1d_to_7d": 0.0,
+            "over_7d": 0.0
+          }
+        }
+      }
+    },
+    {
       "wallet": "0xc3b1951ceffdcaf25640cb37ce1d6cf125579a03",
       "score": 0.4955,
       "dimensions": {
@@ -1712,7 +1537,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:34:26.233496+00:00",
+      "scanned_at": "2026-08-24T01:10:33.363311+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -1812,7 +1637,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:34:12.444372+00:00",
+      "scanned_at": "2026-08-24T01:07:37.494679+00:00",
       "fingerprint": {
         "asset_preferences": {
           "coins_traded": [
@@ -1896,6 +1721,99 @@
       }
     },
     {
+      "wallet": "0xe6781c6a6eda7821a2c17832e2e5edd8fa25c7ea",
+      "score": 0.4938,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.6839,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:01:11.055077+00:00",
+      "fingerprint": {
+        "asset_preferences": {
+          "coins_traded": [
+            "xyz:DRAM",
+            "xyz:KIOXIA",
+            "xyz:MU",
+            "xyz:SKHX",
+            "xyz:SMSN",
+            "xyz:SNDK",
+            "xyz:WDC"
+          ],
+          "coin_frequency": {
+            "xyz:DRAM": 0.228,
+            "xyz:SMSN": 0.161,
+            "xyz:SKHX": 0.149,
+            "xyz:MU": 0.1485,
+            "xyz:WDC": 0.114,
+            "xyz:KIOXIA": 0.107,
+            "xyz:SNDK": 0.0925
+          },
+          "top_5_by_volume": [
+            "xyz:DRAM",
+            "xyz:SMSN",
+            "xyz:MU",
+            "xyz:SKHX",
+            "xyz:SNDK"
+          ]
+        },
+        "timing_profile": {
+          "hourly_distribution": [
+            0.0,
+            0.0,
+            0.822,
+            0.178,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "most_active_hours_utc": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "leverage_profile": {
+          "overall": {}
+        },
+        "entry_exit_style": {
+          "order_type_ratio": {
+            "market": 1.0,
+            "limit": 0.0
+          },
+          "win_rate": 0
+        },
+        "hold_duration": {
+          "overall_minutes": {},
+          "distribution_buckets": {}
+        }
+      }
+    },
+    {
       "wallet": "0xa0d66bab5f04cb3055cc2f6b0494cb33be32c2c2",
       "score": 0.4923,
       "dimensions": {
@@ -1906,7 +1824,87 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:02.263880+00:00"
+      "scanned_at": "2026-08-24T01:05:05.274993+00:00",
+      "fingerprint": {
+        "asset_preferences": {
+          "coins_traded": [
+            "BTC",
+            "HYPE"
+          ],
+          "coin_frequency": {
+            "BTC": 0.557,
+            "HYPE": 0.443
+          },
+          "top_5_by_volume": [
+            "BTC",
+            "HYPE"
+          ]
+        },
+        "timing_profile": {
+          "hourly_distribution": [
+            0.443,
+            0.229,
+            0.0,
+            0.0,
+            0.0,
+            0.068,
+            0.0,
+            0.0,
+            0.0,
+            0.26,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "most_active_hours_utc": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            9
+          ]
+        },
+        "leverage_profile": {
+          "overall": {}
+        },
+        "entry_exit_style": {
+          "order_type_ratio": {
+            "market": 1.0,
+            "limit": 0.0
+          },
+          "win_rate": 0
+        },
+        "hold_duration": {
+          "overall_minutes": {},
+          "distribution_buckets": {}
+        }
+      }
+    },
+    {
+      "wallet": "0x919deb44ebf4c6857b8dfc8119ef9c4396525d10",
+      "score": 0.4905,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.6753,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:04:04.390697+00:00"
     },
     {
       "wallet": "0xc050572d6971c351b207ccc49785ac9314fabaa9",
@@ -1919,7 +1917,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:45.737073+00:00"
+      "scanned_at": "2026-08-24T01:07:09.771996+00:00"
     },
     {
       "wallet": "0xd04f97191224cf0396b09acb80adb06b5823ecad",
@@ -1932,7 +1930,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:32:21.990430+00:00"
+      "scanned_at": "2026-08-24T01:08:38.292972+00:00"
     },
     {
       "wallet": "0xc8b527864ef2ad6dc49de7e99943a3a76ad48891",
@@ -1945,7 +1943,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:22:03.721736+00:00"
+      "scanned_at": "2026-08-24T00:58:04.716251+00:00"
     },
     {
       "wallet": "0x191f565e660e4323b7a54c193eb571b99fdeaffe",
@@ -1958,7 +1956,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:36.719975+00:00"
+      "scanned_at": "2026-08-24T01:06:03.664467+00:00"
     },
     {
       "wallet": "0x6bde78a5b2091bcbc915155328bd138b534387d3",
@@ -1971,111 +1969,124 @@
         "hold_duration": 0.0
       },
       "fills_count": 1858,
-      "scanned_at": "2026-08-23T18:27:22.615608+00:00"
+      "scanned_at": "2026-08-24T01:03:14.171786+00:00"
     },
     {
-      "wallet": "0xd1f73853fc7fb3bdfadb9382a695c2ab15f8d62d",
-      "score": 0.4692,
-      "dimensions": {
-        "asset_preferences": 0.25,
-        "timing_profile": 0.5073,
-        "leverage_profile": 0.3,
-        "entry_exit_style": 0.9966,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:26:50.576822+00:00"
-    },
-    {
-      "wallet": "0xf7772737dd6e90bfbfd6b1f966a0021452cea894",
-      "score": 0.4629,
+      "wallet": "0x3be714dbe0d3a33ae89b04f8caf93364c98b4b1f",
+      "score": 0.4787,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.6036,
+        "timing_profile": 0.7462,
         "leverage_profile": 0.0,
-        "entry_exit_style": 1.0,
+        "entry_exit_style": 0.8308,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:22:35.342224+00:00"
+      "scanned_at": "2026-08-24T01:07:57.755018+00:00"
+    },
+    {
+      "wallet": "0xe1d39d2b30da977d470e0652239372b7ad4b7766",
+      "score": 0.4661,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.7865,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 0.7089,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T00:57:12.764844+00:00"
     },
     {
       "wallet": "0x350e33a777d510616fbdb483d1de3b50d1edfcfb",
-      "score": 0.4551,
+      "score": 0.4631,
       "dimensions": {
         "asset_preferences": 0.3333,
         "timing_profile": 0.4232,
-        "leverage_profile": 0.2387,
+        "leverage_profile": 0.2727,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:05.504761+00:00"
+      "scanned_at": "2026-08-24T00:59:15.403667+00:00"
     },
     {
-      "wallet": "0xf7f0162a355e311f6cc02c26237f0886ae431069",
-      "score": 0.4472,
+      "wallet": "0x2e30c32738a28833e3d85189c04895c25ee54cb5",
+      "score": 0.4561,
       "dimensions": {
-        "asset_preferences": 0.3333,
-        "timing_profile": 0.2295,
-        "leverage_profile": 0.0,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.4173,
+        "leverage_profile": 0.6667,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:28:19.473632+00:00"
+      "scanned_at": "2026-08-24T01:10:28.316641+00:00"
     },
     {
       "wallet": "0x212abcf1a07986aedb244fc4c6f5fe037913a8c6",
-      "score": 0.4413,
+      "score": 0.4471,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.5709,
+        "timing_profile": 0.5862,
         "leverage_profile": 0.0,
-        "entry_exit_style": 0.9607,
+        "entry_exit_style": 0.9603,
         "hold_duration": 0.0
       },
-      "fills_count": 1607,
-      "scanned_at": "2026-08-23T18:23:09.424802+00:00"
+      "fills_count": 1490,
+      "scanned_at": "2026-08-24T00:59:08.674062+00:00"
     },
     {
-      "wallet": "0xc5e328dfeb77f60bfb614e915217477c0eac0c42",
-      "score": 0.4391,
+      "wallet": "0x06f2813038572bee8a76d6b7896a8ddc0e991701",
+      "score": 0.4465,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.5991,
-        "leverage_profile": 0.3686,
-        "entry_exit_style": 0.9983,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:06.810791+00:00"
-    },
-    {
-      "wallet": "0x25eeac5ff395b6392dc54a38e29c25859ba88fca",
-      "score": 0.4346,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.6109,
-        "leverage_profile": 0.3333,
+        "timing_profile": 0.561,
+        "leverage_profile": 0.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:33:13.872703+00:00"
+      "scanned_at": "2026-08-24T00:58:37.748192+00:00"
     },
     {
-      "wallet": "0xcff0af3d7de4436a49adac745a2e992d49125c62",
-      "score": 0.4341,
+      "wallet": "0x6be7cd561eb0132746638a81d4f9b0ab937e6e6b",
+      "score": 0.4462,
       "dimensions": {
-        "asset_preferences": 0.0714,
-        "timing_profile": 0.4576,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9996,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.5171,
+        "leverage_profile": 0.5,
+        "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:33:32.604056+00:00"
+      "scanned_at": "2026-08-24T01:09:21.890315+00:00"
+    },
+    {
+      "wallet": "0xcbeca4cdbfd889186f55fc2a1c83ecc70d18ef3b",
+      "score": 0.4435,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.8172,
+        "leverage_profile": 0.12,
+        "entry_exit_style": 0.9909,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:01:09.676273+00:00"
+    },
+    {
+      "wallet": "0xa8cde6a19789e4d7964ce0e3da14aa29291d7275",
+      "score": 0.4336,
+      "dimensions": {
+        "asset_preferences": 0.1429,
+        "timing_profile": 0.4298,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 0.9244,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:06:10.765384+00:00"
     },
     {
       "wallet": "0xa5b0edf6b55128e0ddae8e51ac538c3188401d41",
@@ -2088,46 +2099,33 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:39.511778+00:00"
+      "scanned_at": "2026-08-24T01:06:00.163950+00:00"
     },
     {
-      "wallet": "0x919deb44ebf4c6857b8dfc8119ef9c4396525d10",
-      "score": 0.4321,
+      "wallet": "0x25eeac5ff395b6392dc54a38e29c25859ba88fca",
+      "score": 0.432,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.5235,
-        "leverage_profile": 0.0,
+        "timing_profile": 0.6023,
+        "leverage_profile": 0.3333,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:27:55.716947+00:00"
+      "scanned_at": "2026-08-24T01:09:19.149634+00:00"
     },
     {
-      "wallet": "0x6be7cd561eb0132746638a81d4f9b0ab937e6e6b",
-      "score": 0.4319,
+      "wallet": "0x16588c497a83e9dfa298d048553a4ef5fd52f65b",
+      "score": 0.4307,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.5229,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 1.0,
+        "timing_profile": 0.7684,
+        "leverage_profile": 0.12,
+        "entry_exit_style": 0.9997,
         "hold_duration": 0.0
       },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:33:20.226376+00:00"
-    },
-    {
-      "wallet": "0xc5ed4501500fcbfb2b88fb7f0aa52f834ed44346",
-      "score": 0.4309,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.5204,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 1.0,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:31.192943+00:00"
+      "fills_count": 1863,
+      "scanned_at": "2026-08-24T00:59:47.377474+00:00"
     },
     {
       "wallet": "0x84abc08c0ea62e687c370154de1f38ea462f4d37",
@@ -2140,7 +2138,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:13.146687+00:00"
+      "scanned_at": "2026-08-24T01:01:21.093442+00:00"
     },
     {
       "wallet": "0x099dae759f35d3a4d83fa805971377bfc8aaed66",
@@ -2153,72 +2151,124 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:22.603534+00:00"
+      "scanned_at": "2026-08-24T01:06:20.214965+00:00"
     },
     {
-      "wallet": "0x577a00a0ee907ee481791049477a3c1fa1470568",
-      "score": 0.4242,
+      "wallet": "0xcff0af3d7de4436a49adac745a2e992d49125c62",
+      "score": 0.4269,
       "dimensions": {
-        "asset_preferences": 0.5,
-        "timing_profile": 0.1067,
-        "leverage_profile": 0.3,
-        "entry_exit_style": 0.9929,
+        "asset_preferences": 0.0769,
+        "timing_profile": 0.4332,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 0.9996,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:56.942582+00:00"
+      "scanned_at": "2026-08-24T01:10:03.410908+00:00"
     },
     {
-      "wallet": "0xf7c8f36f76175b7742da42c8b714a4d8331b7260",
-      "score": 0.4217,
+      "wallet": "0x53babe76166eae33c861aeddf9ce89af20311cd0",
+      "score": 0.4263,
       "dimensions": {
-        "asset_preferences": 0.0588,
-        "timing_profile": 0.4376,
+        "asset_preferences": 0.1,
+        "timing_profile": 0.4868,
+        "leverage_profile": 0.3356,
+        "entry_exit_style": 0.99,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:05:12.000261+00:00"
+    },
+    {
+      "wallet": "0xc5e328dfeb77f60bfb614e915217477c0eac0c42",
+      "score": 0.4188,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.5991,
+        "leverage_profile": 0.2825,
+        "entry_exit_style": 0.9983,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:06:15.114266+00:00"
+    },
+    {
+      "wallet": "0x0d438ba1817d0958ae3bf70b23faaf1d0117c930",
+      "score": 0.4179,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.4866,
         "leverage_profile": 0.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:33:31.236183+00:00"
+      "scanned_at": "2026-08-24T01:09:05.136667+00:00"
+    },
+    {
+      "wallet": "0x577a00a0ee907ee481791049477a3c1fa1470568",
+      "score": 0.4174,
+      "dimensions": {
+        "asset_preferences": 0.5,
+        "timing_profile": 0.0796,
+        "leverage_profile": 0.3,
+        "entry_exit_style": 0.999,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T00:59:48.524170+00:00"
     },
     {
       "wallet": "0x7570206ce9891ba4106be650e07ffb94df7ca8ec",
-      "score": 0.4161,
+      "score": 0.4167,
       "dimensions": {
-        "asset_preferences": 0.0149,
+        "asset_preferences": 0.0167,
         "timing_profile": 0.0,
         "leverage_profile": 1.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:45.661724+00:00"
+      "scanned_at": "2026-08-24T01:05:34.569430+00:00"
+    },
+    {
+      "wallet": "0x8d8ea21e12b0eba630ff43c267c246f57d15c8a4",
+      "score": 0.4121,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.6799,
+        "leverage_profile": 0.3,
+        "entry_exit_style": 0.8022,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:05:06.330520+00:00"
     },
     {
       "wallet": "0x854b9d63fad3a8bf6dd73debbf2fe193699c775e",
-      "score": 0.4127,
+      "score": 0.4116,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.4733,
+        "timing_profile": 0.4705,
         "leverage_profile": 0.0,
         "entry_exit_style": 0.9995,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:22:10.365304+00:00"
+      "scanned_at": "2026-08-24T00:58:12.046146+00:00"
     },
     {
-      "wallet": "0x2cff35b62aa18287a4b866e8c0a5ab6f8781e8a3",
-      "score": 0.4118,
+      "wallet": "0x11645c3264dc73a60a81ec4760d62140dd073b2b",
+      "score": 0.4097,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.0,
-        "leverage_profile": 1.0,
-        "entry_exit_style": 1.0,
+        "timing_profile": 0.4706,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 0.9911,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:03.231798+00:00"
+      "scanned_at": "2026-08-24T00:59:16.263159+00:00"
     },
     {
       "wallet": "0xcf5303ab146d523a0e3dd51ae87b7788e051b70f",
@@ -2231,59 +2281,20 @@
         "hold_duration": 0.0
       },
       "fills_count": 335,
-      "scanned_at": "2026-08-23T18:31:47.586551+00:00"
+      "scanned_at": "2026-08-24T01:08:09.473674+00:00"
     },
     {
-      "wallet": "0xf5d81a135f756ca16544e53c20fc20643ec3ad53",
-      "score": 0.4068,
-      "dimensions": {
-        "asset_preferences": 0.0833,
-        "timing_profile": 0.0,
-        "leverage_profile": 1.0,
-        "entry_exit_style": 0.8329,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:20:11.461649+00:00"
-    },
-    {
-      "wallet": "0x3e4e71d7a08d585e1b5bf885ddbecd8ff6ea15e0",
-      "score": 0.405,
+      "wallet": "0xb1e4fbeb90e32e09346c04a44e3ce466d35ac2db",
+      "score": 0.4019,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.3677,
-        "leverage_profile": 0.6,
-        "entry_exit_style": 0.8821,
-        "hold_duration": 0.0
-      },
-      "fills_count": 701,
-      "scanned_at": "2026-08-23T18:34:04.543440+00:00"
-    },
-    {
-      "wallet": "0x53babe76166eae33c861aeddf9ce89af20311cd0",
-      "score": 0.4046,
-      "dimensions": {
-        "asset_preferences": 0.1,
-        "timing_profile": 0.4133,
-        "leverage_profile": 0.3356,
-        "entry_exit_style": 0.99,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:09.115280+00:00"
-    },
-    {
-      "wallet": "0x461cc78cc9ddd66b0778aea759bdf0866a5ad2f2",
-      "score": 0.4039,
-      "dimensions": {
-        "asset_preferences": 0.1429,
-        "timing_profile": 0.3903,
-        "leverage_profile": 0.3,
+        "timing_profile": 0.445,
+        "leverage_profile": 0.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:28:02.120349+00:00"
+      "scanned_at": "2026-08-24T00:58:30.816306+00:00"
     },
     {
       "wallet": "0x6c8512516ce5669d35113a11ca8b8de322fd84f6",
@@ -2296,33 +2307,20 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:29.170835+00:00"
+      "scanned_at": "2026-08-24T01:06:25.731399+00:00"
     },
     {
-      "wallet": "0x92bff72e6c943a1348aedf15d68e758e811dec64",
-      "score": 0.4004,
+      "wallet": "0x7c4b71c1d8a11ed426f301c372a72e06f528e00b",
+      "score": 0.4019,
       "dimensions": {
-        "asset_preferences": 0.1111,
-        "timing_profile": 0.096,
-        "leverage_profile": 0.6928,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.445,
+        "leverage_profile": 0.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:36.419329+00:00"
-    },
-    {
-      "wallet": "0xe1d39d2b30da977d470e0652239372b7ad4b7766",
-      "score": 0.3975,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.5134,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.8668,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:16.753961+00:00"
+      "fills_count": 191,
+      "scanned_at": "2026-08-24T01:07:17.006064+00:00"
     },
     {
       "wallet": "0x641edd3f198101eb13ce9228a415cbf02b62b6c8",
@@ -2335,33 +2333,33 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:33:21.317691+00:00"
+      "scanned_at": "2026-08-24T01:09:23.140704+00:00"
+    },
+    {
+      "wallet": "0x0871deb34bfd2052b1c10dc4f6c0912a2a47e927",
+      "score": 0.3967,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.0,
+        "leverage_profile": 1.0,
+        "entry_exit_style": 0.9146,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:04:32.104922+00:00"
     },
     {
       "wallet": "0x10f1d87fbb7617df5641d1c2bcb26f143f43202f",
-      "score": 0.3971,
+      "score": 0.396,
       "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.4227,
-        "leverage_profile": 0.4093,
+        "asset_preferences": 0.25,
+        "timing_profile": 0.309,
+        "leverage_profile": 0.2344,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:20:35.669231+00:00"
-    },
-    {
-      "wallet": "0x4025d75db7a13e25dc6305ac00cc1c849f26b7c9",
-      "score": 0.3953,
-      "dimensions": {
-        "asset_preferences": 0.0625,
-        "timing_profile": 0.4804,
-        "leverage_profile": 0.2517,
-        "entry_exit_style": 0.9995,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:26.066814+00:00"
+      "scanned_at": "2026-08-24T00:56:13.509496+00:00"
     },
     {
       "wallet": "0x931153baac031d055389b41d12cd32c9bf0ae7a3",
@@ -2374,20 +2372,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:00.341183+00:00"
-    },
-    {
-      "wallet": "0x9cc53c5af67fb83a16cc41f61e242bade875ab3d",
-      "score": 0.3945,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.6116,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.6903,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:20:47.565370+00:00"
+      "scanned_at": "2026-08-24T01:01:08.647960+00:00"
     },
     {
       "wallet": "0x7a51ce9751493a2448c3ebc76667c6e7cf27900d",
@@ -2400,7 +2385,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:26:40.018888+00:00"
+      "scanned_at": "2026-08-24T01:02:27.549708+00:00"
     },
     {
       "wallet": "0x885327357a8d005c9dfb670583899df6e21f8249",
@@ -2413,46 +2398,33 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:30.804257+00:00"
+      "scanned_at": "2026-08-24T00:59:29.415020+00:00"
     },
     {
-      "wallet": "0x62edf4fae01255c64496e2241e5da680ac959c1c",
-      "score": 0.3928,
+      "wallet": "0x63a9a60e8f4413f07dd37f28fb3906e98116e394",
+      "score": 0.3904,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.6088,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.6876,
+        "timing_profile": 0.5681,
+        "leverage_profile": 0.2,
+        "entry_exit_style": 0.9989,
         "hold_duration": 0.0
       },
-      "fills_count": 806,
-      "scanned_at": "2026-08-23T18:34:11.190186+00:00"
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:02:19.502648+00:00"
     },
     {
-      "wallet": "0x784c4e0857656bd44ece6d168770b5bab62676bb",
-      "score": 0.3925,
+      "wallet": "0xc5ed4501500fcbfb2b88fb7f0aa52f834ed44346",
+      "score": 0.3902,
       "dimensions": {
-        "asset_preferences": 0.25,
-        "timing_profile": 0.1731,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.4146,
         "leverage_profile": 0.0,
-        "entry_exit_style": 0.9957,
+        "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
-      "fills_count": 527,
-      "scanned_at": "2026-08-23T18:33:33.666529+00:00"
-    },
-    {
-      "wallet": "0xa6ee1ed1ae80b8352603654b39f5e7b9bedd5078",
-      "score": 0.3919,
-      "dimensions": {
-        "asset_preferences": 0.5,
-        "timing_profile": 0.0049,
-        "leverage_profile": 0.6,
-        "entry_exit_style": 0.5791,
-        "hold_duration": 0.0
-      },
-      "fills_count": 1198,
-      "scanned_at": "2026-08-23T18:28:38.095792+00:00"
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:01:41.719416+00:00"
     },
     {
       "wallet": "0x61ceef212ff4a86933c69fb6aca2fe35d8f2a62b",
@@ -2465,72 +2437,59 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:24:46.055293+00:00"
+      "scanned_at": "2026-08-24T01:01:06.409507+00:00"
+    },
+    {
+      "wallet": "0xf5d81a135f756ca16544e53c20fc20643ec3ad53",
+      "score": 0.3895,
+      "dimensions": {
+        "asset_preferences": 0.0909,
+        "timing_profile": 0.0,
+        "leverage_profile": 1.0,
+        "entry_exit_style": 0.7221,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T00:55:53.139697+00:00"
     },
     {
       "wallet": "0xdabb1b4497f0d951c8b3357b85f0cbcb9ed1aaab",
-      "score": 0.3884,
+      "score": 0.3881,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.4169,
+        "timing_profile": 0.415,
         "leverage_profile": 0.0,
-        "entry_exit_style": 0.9884,
+        "entry_exit_style": 0.9899,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:33:18.781983+00:00"
-    },
-    {
-      "wallet": "0x63a9a60e8f4413f07dd37f28fb3906e98116e394",
-      "score": 0.3859,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.5527,
-        "leverage_profile": 0.2,
-        "entry_exit_style": 0.9989,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:26:24.463590+00:00"
-    },
-    {
-      "wallet": "0xcfa55ad0264f3e5095c2dbbaede64d8e7cf96f07",
-      "score": 0.3847,
-      "dimensions": {
-        "asset_preferences": 0.1667,
-        "timing_profile": 0.2405,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9883,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:26:19.309404+00:00"
+      "scanned_at": "2026-08-24T01:09:20.507326+00:00"
     },
     {
       "wallet": "0xfa1413451bc8dd3484787eb3c3156a7e28c4aade",
-      "score": 0.3843,
+      "score": 0.3865,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.5009,
-        "leverage_profile": 0.2571,
+        "timing_profile": 0.5007,
+        "leverage_profile": 0.2667,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:16.807123+00:00"
+      "scanned_at": "2026-08-24T01:01:24.671354+00:00"
     },
     {
-      "wallet": "0x1081e214bd6f0137234b92432d9b6033b88965b7",
-      "score": 0.3835,
+      "wallet": "0x4025d75db7a13e25dc6305ac00cc1c849f26b7c9",
+      "score": 0.385,
       "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.8599,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.2287,
+        "asset_preferences": 0.05,
+        "timing_profile": 0.4585,
+        "leverage_profile": 0.2517,
+        "entry_exit_style": 0.9985,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:25:15.338353+00:00"
+      "scanned_at": "2026-08-24T01:01:33.869075+00:00"
     },
     {
       "wallet": "0xa31441e058492bc7cfffda9aa7623c407ae83a81",
@@ -2543,20 +2502,20 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:06.723188+00:00"
+      "scanned_at": "2026-08-24T00:59:12.845327+00:00"
     },
     {
-      "wallet": "0x7c4b71c1d8a11ed426f301c372a72e06f528e00b",
-      "score": 0.3811,
+      "wallet": "0x63db091780ca855ec9d70d2ab0e4f29c19f29398",
+      "score": 0.3817,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.3908,
+        "timing_profile": 0.3924,
         "leverage_profile": 0.0,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
-      "fills_count": 295,
-      "scanned_at": "2026-08-23T18:30:17.191413+00:00"
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:00:09.253224+00:00"
     },
     {
       "wallet": "0x8bcf7a888c66f635ac4a2caf42a8dd12a3b20b14",
@@ -2569,7 +2528,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 609,
-      "scanned_at": "2026-08-23T18:30:18.279934+00:00"
+      "scanned_at": "2026-08-24T01:06:22.360218+00:00"
     },
     {
       "wallet": "0xf25f50ed20ec8d6740ff86d63b8534542a0de047",
@@ -2582,46 +2541,33 @@
         "hold_duration": 0.0
       },
       "fills_count": 460,
-      "scanned_at": "2026-08-23T18:28:25.169951+00:00"
+      "scanned_at": "2026-08-24T01:04:33.156625+00:00"
     },
     {
-      "wallet": "0x023a3d058020fb76cca98f01b3c48c8938a22355",
-      "score": 0.3798,
+      "wallet": "0xb676a78f19227ffe9a97db93263fce675e547dbf",
+      "score": 0.3802,
       "dimensions": {
-        "asset_preferences": 0.0217,
-        "timing_profile": 0.8655,
-        "leverage_profile": 0.4815,
-        "entry_exit_style": 0.0318,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.3295,
+        "leverage_profile": 0.4545,
+        "entry_exit_style": 0.9992,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:20:27.880218+00:00"
+      "scanned_at": "2026-08-24T01:06:19.118424+00:00"
     },
     {
-      "wallet": "0x020ca66c30bec2c4fe3861a94e4db4a498a35872",
-      "score": 0.3791,
+      "wallet": "0xcfa55ad0264f3e5095c2dbbaede64d8e7cf96f07",
+      "score": 0.3796,
       "dimensions": {
-        "asset_preferences": 0.5,
-        "timing_profile": 0.0292,
-        "leverage_profile": 0.2,
-        "entry_exit_style": 0.9995,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:20.534851+00:00"
-    },
-    {
-      "wallet": "0x525232cb6ed5030d2b052b36bfc0baec96986ee3",
-      "score": 0.379,
-      "dimensions": {
-        "asset_preferences": 0.3333,
-        "timing_profile": 0.0594,
+        "asset_preferences": 0.1667,
+        "timing_profile": 0.2272,
         "leverage_profile": 0.0,
-        "entry_exit_style": 0.9877,
+        "entry_exit_style": 0.9883,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:28:08.014979+00:00"
+      "scanned_at": "2026-08-24T01:02:15.590167+00:00"
     },
     {
       "wallet": "0xcab59c7a92b8f7c4d5cde72bb7669ee7d75b6e6e",
@@ -2634,7 +2580,59 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:05.687239+00:00"
+      "scanned_at": "2026-08-24T00:57:08.361736+00:00"
+    },
+    {
+      "wallet": "0x525232cb6ed5030d2b052b36bfc0baec96986ee3",
+      "score": 0.3779,
+      "dimensions": {
+        "asset_preferences": 0.3333,
+        "timing_profile": 0.0566,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 0.9877,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:04:13.016570+00:00"
+    },
+    {
+      "wallet": "0x92bff72e6c943a1348aedf15d68e758e811dec64",
+      "score": 0.3778,
+      "dimensions": {
+        "asset_preferences": 0.1111,
+        "timing_profile": 0.0935,
+        "leverage_profile": 0.6,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:06:28.178056+00:00"
+    },
+    {
+      "wallet": "0x7e1ad5e2bbe30d6d202e7c41036ea0a07c560be9",
+      "score": 0.3767,
+      "dimensions": {
+        "asset_preferences": 0.1667,
+        "timing_profile": 0.327,
+        "leverage_profile": 0.24,
+        "entry_exit_style": 0.9917,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:08:22.351684+00:00"
+    },
+    {
+      "wallet": "0x2cff35b62aa18287a4b866e8c0a5ab6f8781e8a3",
+      "score": 0.3759,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.0,
+        "leverage_profile": 0.8475,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:01:15.158525+00:00"
     },
     {
       "wallet": "0xf02d16a272a842f8bac1d9a9e773aba1933454c6",
@@ -2647,20 +2645,46 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:24:55.455656+00:00"
+      "scanned_at": "2026-08-24T01:01:07.509860+00:00"
+    },
+    {
+      "wallet": "0xc64211d5956e3d5598a3890d38ae3ea2d6886187",
+      "score": 0.3728,
+      "dimensions": {
+        "asset_preferences": 0.25,
+        "timing_profile": 0.0,
+        "leverage_profile": 0.5217,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:08:01.284160+00:00"
+    },
+    {
+      "wallet": "0x70acb6c9345edfb47b7563224722cc762d217c51",
+      "score": 0.3728,
+      "dimensions": {
+        "asset_preferences": 0.0,
+        "timing_profile": 0.6074,
+        "leverage_profile": 0.075,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:10:15.590946+00:00"
     },
     {
       "wallet": "0xe86351e0f69bd808def36e7bb2f9107443838bb8",
-      "score": 0.373,
+      "score": 0.3725,
       "dimensions": {
         "asset_preferences": 0.0769,
         "timing_profile": 0.35,
-        "leverage_profile": 0.3125,
+        "leverage_profile": 0.3102,
         "entry_exit_style": 0.9856,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:26:17.887383+00:00"
+      "scanned_at": "2026-08-24T01:02:17.943501+00:00"
     },
     {
       "wallet": "0xc9d46b11f3b1bbc85ebedfffca09707f8f28dca1",
@@ -2673,20 +2697,20 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:31:17.483596+00:00"
+      "scanned_at": "2026-08-24T01:07:11.615221+00:00"
     },
     {
-      "wallet": "0x3b36a6f0214b7722f37d1dfbef2f912f61fb0073",
-      "score": 0.37,
+      "wallet": "0x6db7204f8783dfddf80b957ba5e40e24251e304d",
+      "score": 0.3701,
       "dimensions": {
-        "asset_preferences": 0.25,
-        "timing_profile": 0.1444,
+        "asset_preferences": 0.1111,
+        "timing_profile": 0.3245,
         "leverage_profile": 0.0,
-        "entry_exit_style": 0.9462,
+        "entry_exit_style": 0.8777,
         "hold_duration": 0.0
       },
-      "fills_count": 593,
-      "scanned_at": "2026-08-23T18:34:24.846405+00:00"
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T00:59:28.141784+00:00"
     },
     {
       "wallet": "0x3b883b85fd41b81ef23b6041248bc6ac0b1c04a7",
@@ -2699,59 +2723,33 @@
         "hold_duration": 0.0
       },
       "fills_count": 1871,
-      "scanned_at": "2026-08-23T18:28:26.392768+00:00"
+      "scanned_at": "2026-08-24T01:05:09.884983+00:00"
     },
     {
-      "wallet": "0xe383e214bd4b32a9ef9cf688ee98976b57f6c9c6",
-      "score": 0.3688,
+      "wallet": "0x784c4e0857656bd44ece6d168770b5bab62676bb",
+      "score": 0.3696,
       "dimensions": {
-        "asset_preferences": 0.0833,
-        "timing_profile": 0.3672,
-        "leverage_profile": 0.3261,
-        "entry_exit_style": 0.9044,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:32:12.240715+00:00"
-    },
-    {
-      "wallet": "0x6db7204f8783dfddf80b957ba5e40e24251e304d",
-      "score": 0.3676,
-      "dimensions": {
-        "asset_preferences": 0.1429,
-        "timing_profile": 0.331,
-        "leverage_profile": 0.3,
-        "entry_exit_style": 0.893,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:23.922348+00:00"
-    },
-    {
-      "wallet": "0xb676a78f19227ffe9a97db93263fce675e547dbf",
-      "score": 0.3674,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.3295,
-        "leverage_profile": 0.4,
-        "entry_exit_style": 0.9992,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:19.938902+00:00"
-    },
-    {
-      "wallet": "0x8ed318c5eefd8c9b15b6ee351734c8a350b2f23a",
-      "score": 0.3663,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.3523,
+        "asset_preferences": 0.25,
+        "timing_profile": 0.1169,
         "leverage_profile": 0.0,
-        "entry_exit_style": 1.0,
+        "entry_exit_style": 0.99,
         "hold_duration": 0.0
       },
-      "fills_count": 277,
-      "scanned_at": "2026-08-23T18:27:05.434608+00:00"
+      "fills_count": 364,
+      "scanned_at": "2026-08-24T01:10:01.049415+00:00"
+    },
+    {
+      "wallet": "0x020ca66c30bec2c4fe3861a94e4db4a498a35872",
+      "score": 0.3653,
+      "dimensions": {
+        "asset_preferences": 0.5,
+        "timing_profile": 0.0292,
+        "leverage_profile": 0.1412,
+        "entry_exit_style": 0.9995,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T00:57:14.185782+00:00"
     },
     {
       "wallet": "0xae78adaba70f18c15418001263504af373884520",
@@ -2764,7 +2762,7 @@
         "hold_duration": 0.0
       },
       "fills_count": 763,
-      "scanned_at": "2026-08-23T18:25:17.897170+00:00"
+      "scanned_at": "2026-08-24T01:01:23.497025+00:00"
     },
     {
       "wallet": "0xab81fef97356d57cd30f8ceb15285b988682c608",
@@ -2777,59 +2775,46 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:25.400363+00:00"
+      "scanned_at": "2026-08-24T01:06:23.464134+00:00"
     },
     {
-      "wallet": "0x8d8ea21e12b0eba630ff43c267c246f57d15c8a4",
-      "score": 0.3636,
+      "wallet": "0x8ed318c5eefd8c9b15b6ee351734c8a350b2f23a",
+      "score": 0.3641,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.5014,
-        "leverage_profile": 0.3,
-        "entry_exit_style": 0.8248,
+        "timing_profile": 0.3466,
+        "leverage_profile": 0.0,
+        "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:28:58.994582+00:00"
+      "fills_count": 284,
+      "scanned_at": "2026-08-24T01:03:10.395186+00:00"
+    },
+    {
+      "wallet": "0x007d76eec0ba411ce873a8819df50dd443d967a0",
+      "score": 0.3639,
+      "dimensions": {
+        "asset_preferences": 0.5,
+        "timing_profile": 0.0,
+        "leverage_profile": 0.1714,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 1191,
+      "scanned_at": "2026-08-24T01:04:02.320067+00:00"
     },
     {
       "wallet": "0xf9faba57a81d1575d3e506dd3eafe7db6f2a3275",
-      "score": 0.3635,
+      "score": 0.3621,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.374,
+        "timing_profile": 0.3693,
         "leverage_profile": 0.3272,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:30:27.891571+00:00"
-    },
-    {
-      "wallet": "0xcb58b8f5ec6d47985f0728465c25a08ef9ad2c7b",
-      "score": 0.3629,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.3169,
-        "leverage_profile": 0.4,
-        "entry_exit_style": 0.9949,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:34:14.986169+00:00"
-    },
-    {
-      "wallet": "0x6d6d7c05ef7f31b31b618400495b4ce4092a5089",
-      "score": 0.361,
-      "dimensions": {
-        "asset_preferences": 0.0,
-        "timing_profile": 0.5475,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.6519,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:38.144052+00:00"
+      "scanned_at": "2026-08-24T01:06:26.918142+00:00"
     },
     {
       "wallet": "0xf87c27f3e754d21d3271ea38cb269e603da80a7c",
@@ -2842,72 +2827,59 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:27:16.765720+00:00"
-    },
-    {
-      "wallet": "0x24fb6523036ebcb3cc51deff138066dccf6bed0f",
-      "score": 0.3572,
-      "dimensions": {
-        "asset_preferences": 0.3333,
-        "timing_profile": 0.0,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9924,
-        "hold_duration": 0.0
-      },
-      "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:08.035845+00:00"
+      "scanned_at": "2026-08-24T01:03:06.112398+00:00"
     },
     {
       "wallet": "0x114dc2c90b61ef68b6ccb45d8e9902609cb08f9d",
-      "score": 0.3568,
+      "score": 0.3573,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.1427,
+        "timing_profile": 0.145,
         "leverage_profile": 0.6,
-        "entry_exit_style": 0.9839,
+        "entry_exit_style": 0.983,
         "hold_duration": 0.0
       },
-      "fills_count": 1375,
-      "scanned_at": "2026-08-23T18:32:19.690075+00:00"
+      "fills_count": 1344,
+      "scanned_at": "2026-08-24T01:08:27.831744+00:00"
     },
     {
-      "wallet": "0x0d438ba1817d0958ae3bf70b23faaf1d0117c930",
-      "score": 0.3568,
+      "wallet": "0x461cc78cc9ddd66b0778aea759bdf0866a5ad2f2",
+      "score": 0.3569,
       "dimensions": {
         "asset_preferences": 0.0,
-        "timing_profile": 0.3277,
-        "leverage_profile": 0.0,
+        "timing_profile": 0.3734,
+        "leverage_profile": 0.3,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:32:56.615883+00:00"
+      "scanned_at": "2026-08-24T01:04:03.251067+00:00"
     },
     {
-      "wallet": "0xab47e5881d92c6a7c8d214b141b805f963ccc133",
-      "score": 0.3567,
+      "wallet": "0xf27ebb91ea420f73b59b205ac7e0b77a90ec8f3c",
+      "score": 0.3568,
       "dimensions": {
-        "asset_preferences": 0.25,
-        "timing_profile": 0.0866,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.9848,
+        "asset_preferences": 0.0141,
+        "timing_profile": 0.6922,
+        "leverage_profile": 0.6263,
+        "entry_exit_style": 0.0096,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:22.993842+00:00"
+      "scanned_at": "2026-08-24T00:58:26.389433+00:00"
     },
     {
-      "wallet": "0x8f8b4759dc93ca55bd6997df719f20f581f10f5c",
-      "score": 0.3566,
+      "wallet": "0xfea5ba5503f19c6121ea469fa4d5fdeac10039bd",
+      "score": 0.3564,
       "dimensions": {
-        "asset_preferences": 0.0667,
-        "timing_profile": 0.2689,
-        "leverage_profile": 0.0,
-        "entry_exit_style": 0.986,
+        "asset_preferences": 0.0,
+        "timing_profile": 0.6446,
+        "leverage_profile": 0.1698,
+        "entry_exit_style": 0.7187,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:23:13.119464+00:00"
+      "scanned_at": "2026-08-24T01:06:07.989916+00:00"
     },
     {
       "wallet": "0x64a4fbb71858f681f3fa10a42b34180a9a48088d",
@@ -2920,59 +2892,72 @@
         "hold_duration": 0.0
       },
       "fills_count": 56,
-      "scanned_at": "2026-08-23T18:24:06.155897+00:00"
+      "scanned_at": "2026-08-24T01:00:08.133648+00:00"
     },
     {
-      "wallet": "0x98d5754c5c552b2cc938e87c6b0400ed7d750aa3",
-      "score": 0.3549,
+      "wallet": "0xf7f0162a355e311f6cc02c26237f0886ae431069",
+      "score": 0.3557,
       "dimensions": {
-        "asset_preferences": 0.1111,
-        "timing_profile": 0.0155,
-        "leverage_profile": 0.6,
+        "asset_preferences": 0.3333,
+        "timing_profile": 0.2162,
+        "leverage_profile": 0.075,
         "entry_exit_style": 1.0,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:24:10.639967+00:00"
+      "scanned_at": "2026-08-24T01:04:20.467085+00:00"
     },
     {
-      "wallet": "0xba535b96d0cf05ca6e609ce704a192739019bc61",
-      "score": 0.3544,
+      "wallet": "0xb83de012dba672c76a7dbbbf3e459cb59d7d6e36",
+      "score": 0.3553,
       "dimensions": {
-        "asset_preferences": 0.125,
+        "asset_preferences": 0.2,
         "timing_profile": 0.0,
-        "leverage_profile": 0.6,
-        "entry_exit_style": 1.0,
+        "leverage_profile": 0.5128,
+        "entry_exit_style": 0.9962,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:32:39.375070+00:00"
+      "scanned_at": "2026-08-24T00:57:39.740425+00:00"
     },
     {
-      "wallet": "0x3d0202e0bb6d8df16f1960329b30151d8b847d6b",
-      "score": 0.3521,
+      "wallet": "0xab47e5881d92c6a7c8d214b141b805f963ccc133",
+      "score": 0.3548,
       "dimensions": {
         "asset_preferences": 0.25,
-        "timing_profile": 0.0655,
+        "timing_profile": 0.0817,
         "leverage_profile": 0.0,
-        "entry_exit_style": 1.0,
+        "entry_exit_style": 0.9848,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:28:32.285675+00:00"
+      "scanned_at": "2026-08-24T00:57:20.549660+00:00"
     },
     {
-      "wallet": "0xbeccae9ffcb69e9d42a1d4e744abf8056149562d",
-      "score": 0.3509,
+      "wallet": "0xe383e214bd4b32a9ef9cf688ee98976b57f6c9c6",
+      "score": 0.3519,
       "dimensions": {
-        "asset_preferences": 0.0278,
-        "timing_profile": 0.6553,
-        "leverage_profile": 0.3464,
-        "entry_exit_style": 0.3883,
+        "asset_preferences": 0.0833,
+        "timing_profile": 0.3428,
+        "leverage_profile": 0.2791,
+        "entry_exit_style": 0.9118,
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:21:11.633927+00:00"
+      "scanned_at": "2026-08-24T01:08:19.801376+00:00"
+    },
+    {
+      "wallet": "0x47472cd62c99b8b5ce7e84e733515133e9aec0bd",
+      "score": 0.3509,
+      "dimensions": {
+        "asset_preferences": 0.05,
+        "timing_profile": 0.3244,
+        "leverage_profile": 0.2953,
+        "entry_exit_style": 0.9706,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:10:23.391318+00:00"
     },
     {
       "wallet": "0xa6181aac4474b43c3ca575ac8b1ad17643ec20b8",
@@ -2985,7 +2970,20 @@
         "hold_duration": 0.0
       },
       "fills_count": 2000,
-      "scanned_at": "2026-08-23T18:29:13.269624+00:00"
+      "scanned_at": "2026-08-24T01:05:18.894238+00:00"
+    },
+    {
+      "wallet": "0xba535b96d0cf05ca6e609ce704a192739019bc61",
+      "score": 0.3503,
+      "dimensions": {
+        "asset_preferences": 0.1111,
+        "timing_profile": 0.0,
+        "leverage_profile": 0.6,
+        "entry_exit_style": 1.0,
+        "hold_duration": 0.0
+      },
+      "fills_count": 2000,
+      "scanned_at": "2026-08-24T01:09:02.633683+00:00"
     }
   ]
 }
